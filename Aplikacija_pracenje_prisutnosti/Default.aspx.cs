@@ -9,7 +9,7 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        Session["FromPage"] = "FBLogIn";
     }
     protected void ImageButtonTwitter_Click(object sender, ImageClickEventArgs e)
     {
@@ -20,10 +20,10 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void ImageButtonGoogle_Click(object sender, ImageClickEventArgs e)
     {
-        if (GPlusFriends.CreateInstance() != null)
+        //if (GPlusFriends.CreateInstance() != null)
             Page.Response.Redirect(@"~\GPlusTable.aspx");
-        else
-            Page.Response.Redirect(@"~\GPlusLogIn.aspx");
+        //else
+        //    Page.Response.Redirect(@"~\GPlusLogIn.aspx");
     }
 
     protected void ImageButtonGowalla_Click(object sender, ImageClickEventArgs e)

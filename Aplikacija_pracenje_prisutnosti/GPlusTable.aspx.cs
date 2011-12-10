@@ -12,22 +12,40 @@ public partial class GPlusTable : System.Web.UI.Page
     private GPlusFriends gPlusFriends;
     private List<GFriend> friends;
     //private bool prviPut;
+    string username;
+    string password;
+
     protected void Page_Load(object sender, EventArgs e)
-    {        
-        gPlusFriends = GPlusFriends.CreateInstance();
-        GPlusFriends.eventWaitH = ewh;
+    {
+        if (gPlusFriends == null && Session["FromPage"].ToString() != "GPlusLogIn")
+            Response.Redirect(@"~\GPlusLogIn.aspx");
+        //gPlusFriends = GPlusFriends.CreateInstance();
+        if (gPlusFriends == null)
+        {
+            username = Session["Uname"].ToString();
+            password = Session["Pass"].ToString();
+            gPlusFriends = new GPlusFriends(username, password);
+        }
+        gPlusFriends.eventWaitH = ewh;
+        //GPlusFriends.eventWaitH = ewh;
+        
         if (gPlusFriends.GetAllFriends().Count == 0)
             ewh.WaitOne();
-        ewh.WaitOne(100);
+        ewh.WaitOne();
+        for (int i = 0; i < gPlusFriends.GetAllFriends().Count; i++)
+        {
+            ewh.WaitOne(100); 
+        }
 
         //boxActiveFriends.DataSource = null;
         boxActiveFriends.Items.Clear();
+        ewh.WaitOne(100);
         friends = gPlusFriends.GetAllFriends();
 
         for (int i = 0; i < friends.Count; i++)
         {
             GFriend cF = friends[i];
-            string fullOutput="";
+            string fullOutput = "";
             if (cF.FullName == null)
                 fullOutput += cF.BareName;
             else
@@ -81,10 +99,10 @@ public partial class GPlusTable : System.Web.UI.Page
     }
     protected void ImageButtonGoogle_Click(object sender, ImageClickEventArgs e)
     {
-        if (GPlusFriends.CreateInstance() != null)
-            Page.Response.Redirect(@"~\GPlusTable.aspx");
-        else
-            Page.Response.Redirect(@"~\GPlusLogIn.aspx");
+        //if (GPlusFriends.CreateInstance() != null)
+        Response.Redirect(@"~\GPlusTable.aspx");
+        //else
+        //    Page.Response.Redirect(@"~\GPlusLogIn.aspx");
     }
     protected void ImageButtonFacebook_Click(object sender, ImageClickEventArgs e)
     {

@@ -33,9 +33,9 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void ImageButtonGoogle_Click(object sender, ImageClickEventArgs e)
     {
-        if (GPlusFriends.CreateInstance() != null)
+        //if (GPlusFriends.CreateInstance() != null)
             Page.Response.Redirect(@"~\GPlusTable.aspx");
-        else
-            Page.Response.Redirect(@"~\GPlusLogIn.aspx");
+        //else
+        //    Page.Response.Redirect(@"~\GPlusLogIn.aspx");
     }
 }
