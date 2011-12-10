@@ -29,24 +29,26 @@ public class GPlusFriends
     XmppClientConnection xmppConn;
     List<GFriend> allFriendsList = new List<GFriend>();
     List<string> activeFriendsList = new List<string>();
+
     //Dictionary<string, string> activeFriendsList = new Dictionary<string, string>();
-    static private GPlusFriends instance;
-    public static System.Threading.EventWaitHandle eventWaitH;    
-    private GPlusFriends(string UserName, string Password)
+    //static private GPlusFriends instance;
+
+    public System.Threading.EventWaitHandle eventWaitH;    
+    public GPlusFriends(string UserName, string Password)
     {
         //GPlusLoginStatus.LoggedIn = true;
         xmppConn = new XmppClientConnection();
         Login(UserName, Password);
     }
-    public static GPlusFriends CreateInstance(string UserName, string Password)
-    {
-        if (instance == null)
-        {
-            instance = new GPlusFriends(UserName, Password);
-            return instance;
-        }
-        else return instance;
-    }
+    //public static GPlusFriends CreateInstance(string UserName, string Password)
+    //{
+    //    if (instance == null)
+    //    {
+    //        instance = new GPlusFriends(UserName, Password);
+    //        return instance;
+    //    }
+    //    else return instance;
+    //}
 
     public List<string> GetActiveFriends()
     {
@@ -123,10 +125,11 @@ public class GPlusFriends
         activeFriendsList.Clear();
         //xmppConn.SendMyPresence();
     }
-    public static GPlusFriends CreateInstance()
-    {
-        return instance;
-    }
+    //public static GPlusFriends CreateInstance()
+    //{
+    //    return instance;
+    //}
+
     //System.Web.UI.WebControls.ListBox lb;
     //public void Attach(System.Web.UI.WebControls.ListBox listBox)
     //{
