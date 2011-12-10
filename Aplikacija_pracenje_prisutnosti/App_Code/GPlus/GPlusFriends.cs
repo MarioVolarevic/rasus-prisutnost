@@ -5,17 +5,33 @@ using System.Web;
 using agsXMPP;
 using agsXMPP.protocol.client;
 
+public class GFriend
+{
+    public string FullName;
+    public string BareName;
+    public ShowType Availability; //NONE je online, dnd je busy itd.    
+    public string StatusMessage;
+    public PresenceType OnOff;
+
+    public GFriend(string fName, string bareName)
+    {
+        this.FullName = fName;
+        this.BareName = bareName;
+    }
+
+
+}
 /// <summary>
 /// Summary description for GPlusFriends
 /// </summary>
 public class GPlusFriends
 {
     XmppClientConnection xmppConn;
-    List<string> allFriendsList = new List<string>();
+    List<GFriend> allFriendsList = new List<GFriend>();
     List<string> activeFriendsList = new List<string>();
     //Dictionary<string, string> activeFriendsList = new Dictionary<string, string>();
     static private GPlusFriends instance;
-
+    public static System.Threading.EventWaitHandle eventWaitH;    
     private GPlusFriends(string UserName, string Password)
     {
         //GPlusLoginStatus.LoggedIn = true;
@@ -36,7 +52,7 @@ public class GPlusFriends
     {
         return activeFriendsList;
     }
-    public List<string> GetAllFriends()
+    public List<GFriend> GetAllFriends()
     {
         return allFriendsList;
     }
@@ -44,18 +60,37 @@ public class GPlusFriends
     private void initUserRcvHandlers()
     {
         xmppConn.OnRosterItem += new XmppClientConnection.RosterHandler(xmppConn_OnRosterItem);
+        xmppConn.OnRosterEnd += new ObjectHandler(xmppConn_OnRosterEnd);
         xmppConn.OnPresence += new PresenceHandler(xmppConn_OnPresence);
+    }
+
+    void xmppConn_OnRosterEnd(object sender)
+    {
+        eventWaitH.Set();
     }
 
     void xmppConn_OnPresence(object sender, Presence pres)
     {
-        activeFriendsList.Add(pres.From.Bare + ";" + pres.Show.ToString() + ";" + pres.Status + ";" + pres.Type.ToString());
-        //activeFriendsList.Add(pres.From.Bare, pres.Show.ToString() + ";" + pres.Status + ";" + pres.Type.ToString());
+        for (int i = 0; i < allFriendsList.Count; i++)
+        {
+            GFriend curFriend = allFriendsList[i];
+            if (curFriend.BareName == pres.From.Bare)
+            {
+                curFriend.Availability = pres.Show;
+                curFriend.StatusMessage = pres.Status;
+                curFriend.OnOff = pres.Type;
+            }
+        }
+        eventWaitH.Set();
+        //activeFriendsList.Add(pres.From.Bare + ";" + pres.Show.ToString() + ";" + pres.Status);
+        //lb.Items.Add(pres.From.Bare + " " + pres.Show.ToString() + " " + pres.Status + " " + pres.Type.ToString());
+        //activeFriendsList.Add(pres.From.Bare, pres.Show.ToString() + ";" + pres.Status + ";" + pres.Type.ToString());        
     }
 
     void xmppConn_OnRosterItem(object sender, agsXMPP.protocol.iq.roster.RosterItem item)
     {
-        allFriendsList.Add(item.Name + ";" + item.Jid.Bare);
+        allFriendsList.Add(new GFriend(item.Name, item.Jid.Bare));
+        //allFriendsList.Add(item.Name + ";" + item.Jid.Bare);
     }
     private void Login(string UserName, string Password)
     {
@@ -83,13 +118,18 @@ public class GPlusFriends
     {
         initUserRcvHandlers();
     }
-    public void ClearActiveList()
+    public void ClearActiveFriendsList()
     {
-        //activeFriendsList.Clear();
-        xmppConn.SendMyPresence();
+        activeFriendsList.Clear();
+        //xmppConn.SendMyPresence();
     }
     public static GPlusFriends CreateInstance()
     {
         return instance;
     }
+    //System.Web.UI.WebControls.ListBox lb;
+    //public void Attach(System.Web.UI.WebControls.ListBox listBox)
+    //{
+    //    lb = listBox;
+    //}
 }
