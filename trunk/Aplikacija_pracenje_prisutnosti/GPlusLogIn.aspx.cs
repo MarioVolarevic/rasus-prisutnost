@@ -27,7 +27,7 @@ public partial class GPlusLogIn : System.Web.UI.Page
     }
     protected void ButtonLogIn_Click(object sender, EventArgs e)
     {
-        GPlusFriends.CreateInstance(TextBoxUsername.Text, TextBoxPassword.Text);
+        GPlusFriends.CreateInstance(TextBoxUsername.Text, TextBoxPassword.Text);        
         Response.Redirect(@"~\GPlusTable.aspx");
     }
     protected void ImageButtonFacebook_Click(object sender, ImageClickEventArgs e)

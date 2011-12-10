@@ -19,14 +19,25 @@
             font-size: medium;
             font-family: Calibri;
         }
+        .gridViewStyle
+        {
+            left: 300px;
+            position: relative;
+            width: auto;
+            height: auto;
+        }
+        .style5
+        {
+            font-size: x-large;
+            height: 309px;
+            width: 760px;
+            text-align: left;
+        }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-    <div class="style1" 
-        
-        
-        
+    <div class="style1"               
         
         style="height: 103px; color: #FFFFFF; width: 760px; text-align: center; background-color: #E2E2E2">
     
@@ -65,13 +76,24 @@
         <br />
         <hr />
     </div>
-     <div class="style2" 
+     <div class="style5" 
         
         
-        style="height: 117px; color: #789CEF; width: 760px; background-color: #EFEFEF; font-weight: 700; font-size: medium; font-family: Calibri; text-align: center;">
+        
+        style="color: #789CEF; background-color: #EFEFEF; font-weight: 700; font-size: medium; font-family: Calibri; text-align: center;">
 
-         <asp:ListBox ID="boxActiveFriends" runat="server" Height="106px" 
-             onprerender="Page_Load" Width="407px"></asp:ListBox>
+
+         &nbsp;
+
+         <asp:ListBox ID="boxActiveFriends" runat="server" Height="163px" Width="665px">
+         </asp:ListBox>
+
+         <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+&nbsp;&nbsp;&nbsp;
+         <asp:DropDownList ID="AvailList" runat="server">
+         </asp:DropDownList>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <asp:Button ID="StatusButton" runat="server" Text="Set Status" />
 
     </div>
     </form>
