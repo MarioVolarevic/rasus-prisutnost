@@ -20,7 +20,6 @@ public partial class _Default : System.Web.UI.Page
 
     protected void ButtonPostNewTweet_Click(object sender, EventArgs e)
     {
-        ListBoxTweets.Items.Clear();
         TwitterAcount.twitterService.SendTweet(TextBoxNewTweet.Text);
     }
 
