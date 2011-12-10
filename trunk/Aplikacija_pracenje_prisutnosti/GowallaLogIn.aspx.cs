@@ -4,13 +4,18 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using gowalaWarp2;
 
-public partial class _Default : System.Web.UI.Page 
+public partial class GowallaLogIn : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (GowallaUser.user != null)
+        {
+            Page.Response.Redirect(@"~\GowallaTable.aspx");
+        }
     }
+
     protected void ImageButtonTwitter_Click(object sender, ImageClickEventArgs e)
     {
         if (TwitterAcount.logedIn == true)
@@ -26,8 +31,16 @@ public partial class _Default : System.Web.UI.Page
             Page.Response.Redirect(@"~\GPlusLogIn.aspx");
     }
 
-    protected void ImageButtonGowalla_Click(object sender, ImageClickEventArgs e)
-    {                
-            Page.Response.Redirect(@"~\GowallaLogIn.aspx");
+    protected void ButtonLogIn_Click(object sender, EventArgs e)
+    {
+        GowallaUser.user = new Gowalla(TextBoxUsername.Text, TextBoxPassword.Text);
+        if (GowallaUser.user.Status == false)
+        {
+            LabelError.Text = "Wrong username and/or password";
+        }
+        else
+        {
+            Page.Response.Redirect(@"~\GowallaTable.aspx");
+        }
     }
 }

@@ -5,12 +5,19 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class _Default : System.Web.UI.Page 
+public partial class GowallaTable : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (GridView1.DataSource == null)
+        {
+            GridView1.DataSource = GowallaUser.user.friends;
+            GridView1.DataBind();
+        }
+        
     }
+
+
     protected void ImageButtonTwitter_Click(object sender, ImageClickEventArgs e)
     {
         if (TwitterAcount.logedIn == true)
@@ -24,10 +31,5 @@ public partial class _Default : System.Web.UI.Page
             Page.Response.Redirect(@"~\GPlusTable.aspx");
         else
             Page.Response.Redirect(@"~\GPlusLogIn.aspx");
-    }
-
-    protected void ImageButtonGowalla_Click(object sender, ImageClickEventArgs e)
-    {                
-            Page.Response.Redirect(@"~\GowallaLogIn.aspx");
     }
 }

@@ -44,4 +44,10 @@ public partial class _Default : System.Web.UI.Page
         else
             Page.Response.Redirect(@"~\GPlusLogIn.aspx");
     }
+
+    protected void ImageButtonGowalla_Click(object sender, ImageClickEventArgs e)
+    {
+        Page.Response.Redirect(@"~\GowallaLogIn.aspx");
+    }
+  
 }

@@ -1,9 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true"  CodeFile="GPlusLogIn.aspx.cs" Inherits="GPlusLogIn" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true"  CodeFile="GowallaLogIn.aspx.cs" Inherits="GowallaLogIn" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head id="Head1" runat="server">
     <title></title>
     <style type="text/css">
         .style1
@@ -46,11 +46,10 @@
         &nbsp;<span class="style4">Select Social Network: </span>&nbsp;<br />
         &nbsp;&nbsp;
         <asp:ImageButton ID="ImageButtonFacebook" runat="server" Height="35px" 
-            ImageUrl="~/Images/FacebookLogo.png" Width="35px" 
-            onclick="ImageButtonFacebook_Click" />
+            ImageUrl="~/Images/FacebookLogo.png" Width="35px" />
 &nbsp;
         <asp:ImageButton ID="ImageButtonGoogle" runat="server" Height="35px" 
-            ImageUrl="~/Images/GoogleLogoSelected.png" Width="35px" 
+            ImageUrl="~/Images/GoogleLogo.png" Width="35px" 
             onclick="ImageButtonGoogle_Click"  />
 &nbsp;
         <asp:ImageButton ID="ImageButtonTwitter" runat="server" Height="35px" 
@@ -58,8 +57,8 @@
             onclick="ImageButtonTwitter_Click" />
 &nbsp;&nbsp;
         <asp:ImageButton ID="ImageButtonGowalla" runat="server" Height="35px" 
-            ImageUrl="~/Images/GowallaLogo.png" Width="35px" 
-            onclick="ImageButtonGowalla_Click"/>
+            ImageUrl="~/Images/GowallaLogo.png" Width="35px"
+            />
 &nbsp;
         <asp:ImageButton ID="ImageButtonLinkedIn" runat="server" Height="35px" 
             ImageUrl="~/Images/LinkedInLogopng.png" Width="35px" />
@@ -80,7 +79,13 @@
          <asp:Button ID="ButtonLogIn" runat="server" Height="24px" Text="Log In" 
              Width="108px" onclick="ButtonLogIn_Click" />
 
+         <br />
+         <asp:Label ID="LabelError" runat="server"></asp:Label>
+
     </div>
+    <p>
+        &nbsp;</p>
     </form>
 </body>
 </html>
+
