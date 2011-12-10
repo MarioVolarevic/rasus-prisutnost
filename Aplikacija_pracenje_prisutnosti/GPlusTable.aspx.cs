@@ -40,4 +40,8 @@ public partial class GPlusTable : System.Web.UI.Page
         else
             Page.Response.Redirect(@"~\GPlusLogIn.aspx");
     }
+    protected void ImageButtonFacebook_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect(@"~\Default.aspx");
+    }
 }

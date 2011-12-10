@@ -32,6 +32,6 @@ public partial class GPlusLogIn : System.Web.UI.Page
     }
     protected void ImageButtonFacebook_Click(object sender, ImageClickEventArgs e)
     {
-
+        Response.Redirect(@"~\Default.aspx");
     }
 }

@@ -32,4 +32,11 @@ public partial class _Default : System.Web.UI.Page
             ListBoxTweets.Items.Add("[" + tweet.CreatedDate + "] --> " + tweet.User.ScreenName + " says: " + tweet.Text + ".");
         }
     }
+    protected void ImageButtonGoogle_Click(object sender, ImageClickEventArgs e)
+    {
+        if (GPlusFriends.CreateInstance() != null)
+            Page.Response.Redirect(@"~\GPlusTable.aspx");
+        else
+            Page.Response.Redirect(@"~\GPlusLogIn.aspx");
+    }
 }
