@@ -49,7 +49,8 @@
             ImageUrl="~/Images/FacebookLogoSelected.png" Width="35px" />
 &nbsp;
         <asp:ImageButton ID="ImageButtonGoogle" runat="server" Height="35px" 
-            ImageUrl="~/Images/GoogleLogo.png" Width="35px"  />
+            ImageUrl="~/Images/GoogleLogo.png" Width="35px" 
+            onclick="ImageButtonGoogle_Click"  />
 &nbsp;
         <asp:ImageButton ID="ImageButtonTwitter" runat="server" Height="35px" 
             ImageUrl="~/Images/TwitterLogo.png" Width="35px" 

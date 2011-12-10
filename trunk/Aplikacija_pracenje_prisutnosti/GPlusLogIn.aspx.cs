@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class _Default : System.Web.UI.Page 
+public partial class GPlusLogIn : System.Web.UI.Page 
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -24,5 +24,14 @@ public partial class _Default : System.Web.UI.Page
             Page.Response.Redirect(@"~\GPlusTable.aspx");
         else
             Page.Response.Redirect(@"~\GPlusLogIn.aspx");
+    }
+    protected void ButtonLogIn_Click(object sender, EventArgs e)
+    {
+        GPlusFriends.CreateInstance(TextBoxUsername.Text, TextBoxPassword.Text);
+        Response.Redirect(@"~\GPlusTable.aspx");
+    }
+    protected void ImageButtonFacebook_Click(object sender, ImageClickEventArgs e)
+    {
+
     }
 }

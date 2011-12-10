@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true"  CodeFile="TwitterLogIn.aspx.cs" Inherits="_Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true"  CodeFile="GPlusTable.aspx.cs" Inherits="GPlusTable" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -49,10 +49,12 @@
             ImageUrl="~/Images/FacebookLogo.png" Width="35px" />
 &nbsp;
         <asp:ImageButton ID="ImageButtonGoogle" runat="server" Height="35px" 
-            ImageUrl="~/Images/GoogleLogo.png" Width="35px"  />
+            ImageUrl="~/Images/GoogleLogoSelected.png" Width="35px" 
+            onclick="ImageButtonGoogle_Click"  />
 &nbsp;
         <asp:ImageButton ID="ImageButtonTwitter" runat="server" Height="35px" 
-            ImageUrl="~/Images/TwitterLogoSelected.png" Width="35px" />
+            ImageUrl="~/Images/TwitterLogo.png" Width="35px" 
+            onclick="ImageButtonTwitter_Click" />
 &nbsp;&nbsp;
         <asp:ImageButton ID="ImageButtonGowalla" runat="server" Height="35px" 
             ImageUrl="~/Images/GowallaLogo.png" Width="35px" />
@@ -65,23 +67,10 @@
      <div class="style2" 
         
         
-        
-        style="height: 278px; color: #789CEF; width: 760px; background-color: #EFEFEF; font-weight: 700; font-size: medium; font-family: Calibri; text-align: center;">
+        style="height: 117px; color: #789CEF; width: 760px; background-color: #EFEFEF; font-weight: 700; font-size: medium; font-family: Calibri; text-align: center;">
 
-         &nbsp;Please allow this App to access your Twitter account.<br />
-         <br />
-         <asp:Image ID="ImageOAuth" runat="server" Height="85px" 
-             ImageUrl="~/Images/OAuthLogo.png" Width="85px" />
-         <br />
-         <br />
-         <asp:Button ID="ButtonGetPin" runat="server" style="font-family: Calibri" 
-             Text="Get PIN" Width="79px" onclick="ButtonGetPin_Click" />
-         <br />
-         <br />
-         PIN: 
-         <asp:TextBox ID="TextBoxPin" runat="server" ></asp:TextBox>
-         &nbsp;<asp:Button ID="ButtonAuthorize" runat="server" Height="24px" Text="Authorize" 
-             Width="87px" style="font-family: Calibri" onclick="ButtonAuthorize_Click" />
+         <asp:ListBox ID="boxActiveFriends" runat="server" Height="106px" 
+             onprerender="Page_Load" Width="407px"></asp:ListBox>
 
     </div>
     </form>
