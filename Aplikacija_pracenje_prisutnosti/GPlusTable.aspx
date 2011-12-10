@@ -88,12 +88,15 @@
          <asp:ListBox ID="boxActiveFriends" runat="server" Height="163px" Width="665px">
          </asp:ListBox>
 
-         <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+         <asp:TextBox ID="BoxStatusMessage" runat="server"></asp:TextBox>
 &nbsp;&nbsp;&nbsp;
          <asp:DropDownList ID="AvailList" runat="server">
+             <asp:ListItem Selected="True">Online</asp:ListItem>
+             <asp:ListItem>Busy</asp:ListItem>
          </asp:DropDownList>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-         <asp:Button ID="StatusButton" runat="server" Text="Set Status" />
+         <asp:Button ID="StatusButton" runat="server" Text="Set Status" 
+             onclick="StatusButton_Click" />
 
     </div>
     </form>

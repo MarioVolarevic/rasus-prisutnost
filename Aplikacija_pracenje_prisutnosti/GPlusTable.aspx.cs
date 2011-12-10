@@ -108,4 +108,12 @@ public partial class GPlusTable : System.Web.UI.Page
     {
         Response.Redirect(@"~\Default.aspx");
     }
+    protected void StatusButton_Click(object sender, EventArgs e)
+    {
+        string statusMessage = BoxStatusMessage.Text;
+        if (AvailList.SelectedValue == "Busy")
+            gPlusFriends.SetStatus(agsXMPP.protocol.client.ShowType.dnd, statusMessage);
+        else if (AvailList.SelectedValue == "Online")
+            gPlusFriends.SetStatus(agsXMPP.protocol.client.ShowType.NONE, statusMessage);
+    }
 }
