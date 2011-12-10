@@ -78,7 +78,8 @@
          <br />
          <br />
          <asp:Button ID="ButtonGetPin" runat="server" style="font-family: Calibri" 
-             Text="Get PIN" Width="79px" onclick="ButtonGetPin_Click" />
+             Text="Get PIN" Width="79px" onclick="ButtonGetPin_Click" 
+             onprerender="ButtonGetPin_PreRender" />
          <br />
          <br />
          PIN: 

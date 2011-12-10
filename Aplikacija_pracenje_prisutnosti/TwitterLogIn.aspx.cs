@@ -11,21 +11,14 @@ using TweetSharp.Twitter.Service;
 
 public partial class _Default : System.Web.UI.Page 
 {
+    string authUrl;
+
     protected void Page_Load(object sender, EventArgs e)
     {
     }
 
     protected void ButtonGetPin_Click(object sender, EventArgs e)
     {
-        TwitterClientInfo twitterClientInfo = new TwitterClientInfo();
-        twitterClientInfo.ConsumerKey = TwitterAcount.ConsumerKey;
-        twitterClientInfo.ConsumerSecret = TwitterAcount.ConsumerSecret;
-
-        TwitterAcount.twitterService = new TwitterService(twitterClientInfo);
-
-        TwitterAcount.requestToken = TwitterAcount.twitterService.GetRequestToken();
-        string authUrl = TwitterAcount.twitterService.GetAuthorizationUrl(TwitterAcount.requestToken);
-
         Process.Start(authUrl);
     }
 
@@ -49,5 +42,19 @@ public partial class _Default : System.Web.UI.Page
     {
         Page.Response.Redirect(@"~\GowallaLogIn.aspx");
     }
-  
+
+    protected void ButtonGetPin_PreRender(object sender, EventArgs e)
+    {
+        TwitterClientInfo twitterClientInfo = new TwitterClientInfo();
+        twitterClientInfo.ConsumerKey = TwitterAcount.ConsumerKey;
+        twitterClientInfo.ConsumerSecret = TwitterAcount.ConsumerSecret;
+
+        TwitterAcount.twitterService = new TwitterService(twitterClientInfo);
+
+        TwitterAcount.requestToken = TwitterAcount.twitterService.GetRequestToken();
+        authUrl = TwitterAcount.twitterService.GetAuthorizationUrl(TwitterAcount.requestToken);
+
+        authUrl = Page.ResolveClientUrl(authUrl);
+        ButtonGetPin.OnClientClick = "window.open('" + authUrl + "'); return false;";
+    }
 }
