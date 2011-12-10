@@ -5,11 +5,26 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class _Default : System.Web.UI.Page 
+public partial class GPlusTable : System.Web.UI.Page 
 {
+    private GPlusFriends gPlusFriends;
+
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        gPlusFriends = GPlusFriends.CreateInstance();
+        //gPlusFriends.ClearActiveList();
+        List<string> l = gPlusFriends.GetActiveFriends();
+        //boxActiveFriends.ClearSelection();
+        foreach (string s in l)
+        {
+            boxActiveFriends.Items.Add(s);
+        }
+        //actFriendsBox.ClearSelection();
+        //foreach (string s in l)
+        //{
+        //    actFriendsBox.Items.Add(s);
+        //}
+        //gPlusFriends.ClearActiveList();
     }
     protected void ImageButtonTwitter_Click(object sender, ImageClickEventArgs e)
     {
