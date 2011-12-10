@@ -37,4 +37,11 @@ public partial class _Default : System.Web.UI.Page
         
         Page.Response.Redirect(@"~\TwitterTable.aspx");
     }
+    protected void ImageButtonGoogle_Click(object sender, ImageClickEventArgs e)
+    {
+        if (GPlusFriends.CreateInstance() != null)
+            Page.Response.Redirect(@"~\GPlusTable.aspx");
+        else
+            Page.Response.Redirect(@"~\GPlusLogIn.aspx");
+    }
 }
