@@ -56,7 +56,9 @@
             ImageUrl="~/Images/TwitterLogoSelected.png" Width="35px" />
 &nbsp;&nbsp;
         <asp:ImageButton ID="ImageButtonGowalla" runat="server" Height="35px" 
-            ImageUrl="~/Images/GowallaLogo.png" Width="35px" />
+            ImageUrl="~/Images/GowallaLogo.png" Width="35px" 
+            onclick="ImageButtonGowalla_Click"
+           />
 &nbsp;
         <asp:ImageButton ID="ImageButtonLinkedIn" runat="server" Height="35px" 
             ImageUrl="~/Images/LinkedInLogopng.png" Width="35px" />

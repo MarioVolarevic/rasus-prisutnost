@@ -34,4 +34,9 @@ public partial class GPlusLogIn : System.Web.UI.Page
     {
         Response.Redirect(@"~\Default.aspx");
     }
+
+    protected void ImageButtonGowalla_Click(object sender, ImageClickEventArgs e)
+    {
+        Page.Response.Redirect(@"~\GowallaLogIn.aspx");
+    }
 }
