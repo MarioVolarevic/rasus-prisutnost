@@ -30,4 +30,8 @@ public partial class _Default : System.Web.UI.Page
     {                
             Page.Response.Redirect(@"~\GowallaLogIn.aspx");
     }
+    protected void ImageButtonLinkedIn_Click(object sender, ImageClickEventArgs e)
+    {
+        Page.Response.Redirect(@"~\LinkedInLogIn.aspx");
+    }
 }
