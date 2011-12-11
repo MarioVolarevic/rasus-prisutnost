@@ -9,6 +9,17 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        HttpCookie cookie = new HttpCookie("userID");
+        HttpCookie cookieRet = Request.Cookies["userID"];
+        if (cookieRet == null)
+        {            
+            cookie.Value = UserX.counter.ToString();
+            UserX.counter++;
+            Response.Cookies.Add(cookie);
+        }
+        
+        
     }
     protected void ImageButtonTwitter_Click(object sender, ImageClickEventArgs e)
     {

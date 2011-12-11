@@ -8,12 +8,17 @@ using gowalaWarp2;
 
 public partial class GowallaLogIn : System.Web.UI.Page
 {
+    private string userId;
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (GowallaUser.user != null)
+        HttpCookie cookie = Request.Cookies["userID"];
+
+        this.userId = cookie.Value;
+        if (UserX.listOfAllUser.ContainsKey(userId))
         {
             Page.Response.Redirect(@"~\GowallaTable.aspx");
         }
+
     }
 
     protected void ImageButtonTwitter_Click(object sender, ImageClickEventArgs e)
@@ -33,13 +38,14 @@ public partial class GowallaLogIn : System.Web.UI.Page
 
     protected void ButtonLogIn_Click(object sender, EventArgs e)
     {
-        GowallaUser.user = new Gowalla(TextBoxUsername.Text, TextBoxPassword.Text);
-        if (GowallaUser.user.Status == false)
+        Gowalla newUser = new Gowalla(TextBoxUsername.Text, TextBoxPassword.Text);
+        if (newUser.Status == false)
         {
             LabelError.Text = "Wrong username and/or password";
         }
         else
         {
+            UserX.listOfAllUser.Add(userId, newUser);
             Page.Response.Redirect(@"~\GowallaTable.aspx");
         }
     }

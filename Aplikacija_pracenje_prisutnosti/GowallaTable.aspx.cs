@@ -9,12 +9,13 @@ public partial class GowallaTable : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (GridView1.DataSource == null)
-        {
-            GridView1.DataSource = GowallaUser.user.friends;
-            GridView1.DataBind();
-        }
-        
+        HttpCookie cookie = Request.Cookies["userID"];
+        string userId = cookie.Value;
+
+        GridView1.DataSource = UserX.listOfAllUser[userId].friends;
+        GridView1.DataBind();
+
+
     }
 
 
