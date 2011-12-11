@@ -9,7 +9,6 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        Session["FromPage"] = "FBLogIn";
     }
     protected void ImageButtonTwitter_Click(object sender, ImageClickEventArgs e)
     {
