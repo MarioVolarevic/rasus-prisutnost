@@ -7,38 +7,46 @@ using System.Web.UI.WebControls;
 using Facebook_Graph_Toolkit;
 using Facebook_Graph_Toolkit.GraphApi;
 using Facebook_Graph_Toolkit.FacebookObjects;
+using Facebook_Graph_Toolkit.Helpers;
+using JSON;
 using FacebookLibrary;
 
-
-public partial class _Default : CanvasPage 
+public partial class _Default : CanvasPage
 {
     protected void Page_PreInit(object sender, EventArgs e)
     {
-
         RequireLogin = true;
-        Session["FBLogInReq"] = "OK";
         ExtendedPermissions = "friends_online_presence";
-        CheckExtendedPermissions = true;
+        CheckExtendedPermissions = true;              
+    }
+
+    protected void OnLoad(object sender, EventArgs e)
+    {
+
+       
 
     }
-    
+
     protected void Page_Load(object sender, EventArgs e)
     {
-        //HttpCookie cookie = new HttpCookie("userID");
-        //HttpCookie cookieRet = Request.Cookies["userID"];
+        HttpCookie cookie = new HttpCookie("userID");
+        HttpCookie cookieRet = Request.Cookies["userID"];
 
-        //if (cookieRet == null)
-        //{            
-        //    cookie.Value = UserX.counter.ToString();
-        //    UserX.counter++;
-        //    Response.Cookies.Add(cookie);
-        //}
-        //vjekin kod
-        if (!IsPostBack)
+        //JsonObject newObject = new JsonObject();
+        //Facebook_Graph_Toolkit.GraphApi.User user = new User(FBUserID);
+        //newObject = user.JsonData;
+
+        if (cookieRet == null)
         {
-            GridView1.DataSource = FacebookClient.Connect(Api, FBUserID);
-            GridView1.DataBind();
+            cookie.Value = UserX.counter.ToString();
+            UserX.counter++;
+            Response.Cookies.Add(cookie);
         }
+        //vjekin kod
+
+        GridView1.DataSource = FacebookClient.Connect(Api, FBUserID);
+        GridView1.DataBind();
+
     }
 
     protected void ImageButtonFacebook_Click(object sender, ImageClickEventArgs e) 
@@ -57,6 +65,7 @@ public partial class _Default : CanvasPage
             Page.Response.Redirect(@"~\GPlusTable.aspx");
         //else
         //    Page.Response.Redirect(@"~\GPlusLogIn.aspx");
+        //IframeHelper.IframeRedirect(@"\GPlusLogIn.aspx", false, true);
     }
 
     protected void ImageButtonGowalla_Click(object sender, ImageClickEventArgs e)
