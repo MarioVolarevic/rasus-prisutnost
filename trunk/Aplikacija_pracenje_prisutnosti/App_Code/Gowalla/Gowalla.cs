@@ -32,12 +32,12 @@ namespace gowalaWarp2
 
             
             string result = fetchBasicUserData(authentication.required);
-            friends = catchFriends();
+           // friends = catchFriends();
            
         }
         
         //public List<Friend> catchFriends()
-        public List<Friend> catchFriends()
+        public List<Friend> CatchFriends()
         {
             #region Load HTML with informations and filter users
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create("https://gowalla.com/users/"+this.alias+"/followings");
@@ -179,21 +179,22 @@ namespace gowalaWarp2
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                 {
                     
-                    StreamReader reader = new StreamReader(response.GetResponseStream());                    
-                    
+                    StreamReader reader = new StreamReader(response.GetResponseStream());
+
                     string result = reader.ReadToEnd();
                     String[] data = result.Split(',');
 
                     //string imUrl = data.First(x => x.Contains("image_url"));
                     //imUrl = imUrl.Split('"')[3];
                     //Stream imageStream = getResource(imUrl);
-                    //this.avatar = Image.FromStream(imageStream);                                                                                                 
+                    //this.avatar = Image.FromStream(imageStream);
 
                     this.firstName = data.First(x => x.Contains("first_name")).Split('"')[3];
                     this.lastName = data.First(x => x.Contains("last_name")).Split('"')[3];
                     this.alias = data.First(x => x.Contains("username")).Split('"')[3];
                     return result.Replace(',', '\n');
                 }
+              //  return "jes";
                 
             }
             catch (System.Net.WebException e)
