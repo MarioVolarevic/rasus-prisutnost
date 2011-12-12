@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Threading;
+using Facebook_Graph_Toolkit;
 
 public partial class GPlusTable : System.Web.UI.Page
 {
@@ -111,7 +112,7 @@ public partial class GPlusTable : System.Web.UI.Page
     }
     protected void ImageButtonGowalla_Click(object sender, ImageClickEventArgs e)
     {
-        Page.Response.Redirect(@"~\GowallaLogIn.aspx");
+        Page.Response.Redirect(@"~\GowallaTable.aspx");
 
     }
 }

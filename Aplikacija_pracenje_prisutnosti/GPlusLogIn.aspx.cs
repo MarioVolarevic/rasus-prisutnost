@@ -4,8 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Facebook_Graph_Toolkit;
 
-public partial class GPlusLogIn : System.Web.UI.Page 
+public partial class GPlusLogIn : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -28,7 +29,7 @@ public partial class GPlusLogIn : System.Web.UI.Page
 
     protected void ImageButtonGowalla_Click(object sender, ImageClickEventArgs e)
     {
-        Page.Response.Redirect(@"~\GowallaLogIn.aspx");
+        Page.Response.Redirect(@"~\GowallaTable.aspx");
     }
 
     protected void ButtonLogIn_Click(object sender, EventArgs e)
