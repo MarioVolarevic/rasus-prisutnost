@@ -17,24 +17,24 @@ public partial class GPlusTable : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["GUname"] == null || Session["GPass"] == null)
-        {
+        if (gPlusFriends == null && Session["FromPage"].ToString() != "GPlusLogIn")
             Response.Redirect(@"~\GPlusLogIn.aspx");
-        }
-        else
+        //gPlusFriends = GPlusFriends.CreateInstance();
+        if (gPlusFriends == null)
         {
-            username = Session["GUname"].ToString();
-            password = Session["GPass"].ToString();
+            username = Session["Uname"].ToString();
+            password = Session["Pass"].ToString();
             gPlusFriends = new GPlusFriends(username, password);
         }
         gPlusFriends.eventWaitH = ewh;
+        //GPlusFriends.eventWaitH = ewh;
         
         if (gPlusFriends.GetAllFriends().Count == 0)
             ewh.WaitOne();
         ewh.WaitOne();
         for (int i = 0; i < gPlusFriends.GetAllFriends().Count; i++)
         {
-            ewh.WaitOne(30); 
+            ewh.WaitOne(100); 
         }
 
         //boxActiveFriends.DataSource = null;
@@ -77,6 +77,16 @@ public partial class GPlusTable : System.Web.UI.Page
             fullOutput += cF.StatusMessage;
             boxActiveFriends.Items.Add(fullOutput);
         }
+
+        //if (IsPostBack)
+        //    Response.Redirect(Request.RawUrl);
+
+        //if (prviPut)
+        //{
+        //    prviPut = false;
+        //    ewh.WaitOne(1000);
+        //    Response.Redirect(Request.RawUrl);
+        //}
     }
 
 
@@ -105,14 +115,5 @@ public partial class GPlusTable : System.Web.UI.Page
             gPlusFriends.SetStatus(agsXMPP.protocol.client.ShowType.dnd, statusMessage);
         else if (AvailList.SelectedValue == "Online")
             gPlusFriends.SetStatus(agsXMPP.protocol.client.ShowType.NONE, statusMessage);
-    }
-    protected void ImageButtonLinkedIn_Click(object sender, ImageClickEventArgs e)
-    {
-        Page.Response.Redirect(@"~\LinkedInLogIn.aspx");
-    }
-    protected void ImageButtonGowalla_Click(object sender, ImageClickEventArgs e)
-    {
-        Page.Response.Redirect(@"~\GowallaLogIn.aspx");
-
     }
 }

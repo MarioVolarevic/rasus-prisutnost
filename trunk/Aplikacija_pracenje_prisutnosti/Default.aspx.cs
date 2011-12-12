@@ -9,6 +9,7 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        Session["FromPage"] = "FBLogIn";
 
         HttpCookie cookie = new HttpCookie("userID");
         HttpCookie cookieRet = Request.Cookies["userID"];

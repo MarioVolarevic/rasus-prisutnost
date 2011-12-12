@@ -9,6 +9,7 @@ public partial class GPlusLogIn : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        Session["FromPage"] = "GPlusLogIn";
     }
     protected void ImageButtonTwitter_Click(object sender, ImageClickEventArgs e)
     {
@@ -36,13 +37,9 @@ public partial class GPlusLogIn : System.Web.UI.Page
 
     protected void ButtonLogIn_Click(object sender, EventArgs e)
     {
-        Session["GUname"] = TextBoxUsername.Text;
-        Session["GPass"] = TextBoxPassword.Text;
+        Session["Uname"] = TextBoxUsername.Text;
+        Session["Pass"] = TextBoxPassword.Text;
         //GPlusFriends.CreateInstance(TextBoxUsername.Text, TextBoxPassword.Text);     
         Response.Redirect(@"~\GPlusTable.aspx");
-    }
-    protected void ImageButtonLinkedIn_Click(object sender, ImageClickEventArgs e)
-    {
-        Page.Response.Redirect(@"~\LinkedInLogIn.aspx");
     }
 }

@@ -61,7 +61,8 @@
             />
 &nbsp;
         <asp:ImageButton ID="ImageButtonLinkedIn" runat="server" Height="35px" 
-            ImageUrl="~/Images/LinkedInLogopng.png" Width="35px" />
+            ImageUrl="~/Images/LinkedInLogopng.png" Width="35px"
+             onclick="ImageButtonLinkedIn_Click" />
         <br />
         <hr />
     </div>

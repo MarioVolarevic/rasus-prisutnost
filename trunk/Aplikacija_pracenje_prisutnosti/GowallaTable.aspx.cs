@@ -33,4 +33,9 @@ public partial class GowallaTable : System.Web.UI.Page
         //else
         //    Page.Response.Redirect(@"~\GPlusLogIn.aspx");
     }
+    protected void ImageButtonLinkedIn_Click(object sender, ImageClickEventArgs e)
+    {
+     
+        Page.Response.Redirect(@"~\LinkedInLogIn.aspx");     
+    }
 }
