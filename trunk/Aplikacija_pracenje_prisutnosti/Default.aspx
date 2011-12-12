@@ -68,20 +68,6 @@
         <br />
         <hr />
     </div>
-     <div class="style2" 
-        
-        
-        style="height: 117px; color: #789CEF; width: 760px; background-color: #EFEFEF; font-weight: 700; font-size: medium; font-family: Calibri; text-align: center;">
-
-         Username/Email:
-         <asp:TextBox ID="TextBoxUsername" runat="server"></asp:TextBox>
-         <br />
-         Password:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-         <asp:TextBox ID="TextBoxPassword" runat="server" TextMode="Password"></asp:TextBox>
-         <br />
-         <asp:Button ID="ButtonLogIn" runat="server" Height="24px" Text="Log In" 
-             Width="108px" />       
-    </div>
      <asp:ListBox ID="ListBoxFB" runat="server" Height="269px" Width="622px" 
              style="font-family: Calibri">
          </asp:ListBox>
