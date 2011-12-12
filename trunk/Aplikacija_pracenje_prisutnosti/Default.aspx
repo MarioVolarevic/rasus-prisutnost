@@ -47,7 +47,8 @@
         &nbsp;<span class="style4">Select Social Network: </span>&nbsp;<br />
         &nbsp;&nbsp;
         <asp:ImageButton ID="ImageButtonFacebook" runat="server" Height="35px" 
-            ImageUrl="~/Images/FacebookLogoSelected.png" Width="35px" />
+            ImageUrl="~/Images/FacebookLogoSelected.png" Width="35px"
+            onclick="ImageButtonFacebook_Click"/>
 &nbsp;
         <asp:ImageButton ID="ImageButtonGoogle" runat="server" Height="35px" 
             ImageUrl="~/Images/GoogleLogo.png" Width="35px" 
@@ -81,6 +82,8 @@
          <asp:Button ID="ButtonLogIn" runat="server" Height="24px" Text="Log In" 
              Width="108px" />
 
+        <asp:GridView ID="GridView1" runat="server" Height="215px" Width="326px">
+        </asp:GridView>
     </div>
     </form>
 </body>

@@ -4,9 +4,21 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Facebook_Graph_Toolkit;
+using Facebook_Graph_Toolkit.GraphApi;
+using Facebook_Graph_Toolkit.FacebookObjects;
+using FacebookLibrary;
 
-public partial class _Default : System.Web.UI.Page 
+
+public partial class _Default : CanvasPage 
 {
+    protected void Page_PreInit(object sender, EventArgs e) 
+    {
+        //RequireLogin = true;
+        ExtendedPermissions = "friends_online_presence";
+        CheckExtendedPermissions = true;    
+    }
+    
     protected void Page_Load(object sender, EventArgs e)
     {
         Session["FromPage"] = "FBLogIn";
@@ -19,9 +31,17 @@ public partial class _Default : System.Web.UI.Page
             UserX.counter++;
             Response.Cookies.Add(cookie);
         }
-        
+        GridView1.DataSource = FacebookClient.Connect(Api, FBUserID);
+        GridView1.DataBind();
         
     }
+
+    protected void ImageButtonFacebook_Click(object sender, ImageClickEventArgs e) 
+    {
+        GridView1.DataSource = FacebookClient.Connect(Api, FBUserID);
+        GridView1.DataBind();    
+    }
+
     protected void ImageButtonTwitter_Click(object sender, ImageClickEventArgs e)
     {
         if (TwitterAcount.logedIn == true)
