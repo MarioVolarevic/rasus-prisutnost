@@ -31,7 +31,7 @@
         &nbsp;<span class="style4">Select Social Network: </span>&nbsp;<br />
         &nbsp;&nbsp;
          <asp:ImageButton ID="ImageButtonFacebook" runat="server" Height="35px" 
-            ImageUrl="~/Images/FacebookLogoSelected.png" Width="35px" />
+            ImageUrl="~/Images/FacebookLogo.png" Width="35px" />
 &nbsp;
         <asp:ImageButton ID="ImageButtonGoogle" runat="server" Height="35px" 
             ImageUrl="~/Images/GoogleLogo.png" Width="35px" 
@@ -42,11 +42,12 @@
             onclick="ImageButtonTwitter_Click" />
 &nbsp;&nbsp;
         <asp:ImageButton ID="ImageButtonGowalla" runat="server" Height="35px" 
-            ImageUrl="~/Images/GowallaLogo.png" Width="35px"
+            ImageUrl="~/Images/GowallaLogoSelected.png" Width="35px"
              />
 &nbsp;
         <asp:ImageButton ID="ImageButtonLinkedIn" runat="server" Height="35px" 
-            ImageUrl="~/Images/LinkedInLogopng.png" Width="35px" />
+            ImageUrl="~/Images/LinkedInLogopng.png" Width="35px"
+             onclick="ImageButtonLinkedIn_Click" />
         <br />
         <br />
         <br />

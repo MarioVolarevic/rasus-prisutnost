@@ -35,7 +35,12 @@ public partial class GowallaLogIn : System.Web.UI.Page
         //else
         //    Page.Response.Redirect(@"~\GPlusLogIn.aspx");
     }
-
+    protected void ImageButtonLinkedIn_Click(object sender, ImageClickEventArgs e)
+    {
+       
+        Page.Response.Redirect(@"~\LinkedInLogIn.aspx");
+     
+    }
     protected void ButtonLogIn_Click(object sender, EventArgs e)
     {
         Gowalla newUser = new Gowalla(TextBoxUsername.Text, TextBoxPassword.Text);
