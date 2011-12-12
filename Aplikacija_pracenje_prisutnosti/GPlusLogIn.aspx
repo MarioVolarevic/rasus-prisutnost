@@ -81,6 +81,9 @@
          <asp:Button ID="ButtonLogIn" runat="server" Height="24px" Text="Log In" 
              Width="108px" onclick="ButtonLogIn_Click" />
 
+         <br />
+         <asp:Label ID="invalidUP" runat="server"></asp:Label>
+
     </div>
     </form>
 </body>
