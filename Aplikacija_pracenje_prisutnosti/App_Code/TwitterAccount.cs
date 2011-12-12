@@ -14,11 +14,6 @@ using TweetSharp.Twitter.Service;
 /// </summary>
 public class TwitterAcount
 {
-    public static bool logedIn = false;
-    public static TwitterService twitterService;
-    public static OAuthToken requestToken;
-    public static OAuthToken accessToken;
-
 	public TwitterAcount()
 	{
 	}
@@ -31,6 +26,17 @@ public class TwitterAcount
     public static string ConsumerKey
     {
         get { return "NurbulMLmW3cY9wTovQgBQ"; }
+    }
+
+    public static TwitterClientInfo ClientInfo
+    {
+        get 
+        {
+            TwitterClientInfo twitterClientInfo = new TwitterClientInfo();
+            twitterClientInfo.ConsumerKey = TwitterAcount.ConsumerKey;
+            twitterClientInfo.ConsumerSecret = TwitterAcount.ConsumerSecret;
+            return twitterClientInfo;
+        }
     }
 
 }

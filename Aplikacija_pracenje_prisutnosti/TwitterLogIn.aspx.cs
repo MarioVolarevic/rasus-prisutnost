@@ -12,6 +12,9 @@ using TweetSharp.Twitter.Service;
 public partial class _Default : System.Web.UI.Page 
 {
     string authUrl;
+    TwitterService twitterService;
+    OAuthToken requestToken;
+    OAuthToken accessToken;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -25,10 +28,12 @@ public partial class _Default : System.Web.UI.Page
 
     protected void ButtonAuthorize_Click(object sender, EventArgs e)
     {
-        TwitterAcount.accessToken = TwitterAcount.twitterService.GetAccessToken(TwitterAcount.requestToken, this.TextBoxPin.Text);
-        TwitterAcount.twitterService.AuthenticateWith(TwitterAcount.accessToken.Token, TwitterAcount.accessToken.TokenSecret);
-        TwitterAcount.logedIn = true;
-        
+        OAuthToken accessToken;
+        accessToken = twitterService.GetAccessToken(requestToken, this.TextBoxPin.Text);
+
+        Session["TwitterToken"] = accessToken.Token;
+        Session["TwitterTokenSecret"] = accessToken.TokenSecret;
+              
         Page.Response.Redirect(@"~\TwitterTable.aspx");
     }
     protected void ImageButtonGoogle_Click(object sender, ImageClickEventArgs e)
@@ -61,14 +66,9 @@ public partial class _Default : System.Web.UI.Page
 
     private void CreateAuthUrl()
     {
-        TwitterClientInfo twitterClientInfo = new TwitterClientInfo();
-        twitterClientInfo.ConsumerKey = TwitterAcount.ConsumerKey;
-        twitterClientInfo.ConsumerSecret = TwitterAcount.ConsumerSecret;
-
-        TwitterAcount.twitterService = new TwitterService(twitterClientInfo);
-
-        TwitterAcount.requestToken = TwitterAcount.twitterService.GetRequestToken();
-        authUrl = TwitterAcount.twitterService.GetAuthorizationUrl(TwitterAcount.requestToken);
+        twitterService = new TwitterService(TwitterAcount.ClientInfo);
+        requestToken = twitterService.GetRequestToken();
+        authUrl = twitterService.GetAuthorizationUrl(requestToken);
 
         authUrl = Page.ResolveClientUrl(authUrl);
     }

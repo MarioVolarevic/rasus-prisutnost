@@ -12,20 +12,30 @@ using TweetSharp.Twitter.Service;
 
 public partial class _Default : System.Web.UI.Page 
 {
+    TwitterService twitterService = new TwitterService(TwitterAcount.ClientInfo);
+
     protected void Page_Load(object sender, EventArgs e)
     {
-        ListBoxTweets.Items.Clear();
-        refreshFriendTweets();
+        if (Session["TwitterToken"] == null || Session["TwitterTokenSecret"] == null)
+        {
+            Response.Redirect(@"~\TwitterLogIn.aspx");
+        }
+        else
+        {
+            twitterService.AuthenticateWith(Session["TwitterToken"].ToString(), Session["TwitterTokenSecret"].ToString());
+            ListBoxTweets.Items.Clear();
+            refreshFriendTweets();
+        }
     }
 
     protected void ButtonPostNewTweet_Click(object sender, EventArgs e)
     {
-        TwitterAcount.twitterService.SendTweet(TextBoxNewTweet.Text);
+        twitterService.SendTweet(TextBoxNewTweet.Text);
     }
 
     protected void refreshFriendTweets()
     {
-        IEnumerable<TwitterStatus> tweets = TwitterAcount.twitterService.ListTweetsOnFriendsTimeline();
+        IEnumerable<TwitterStatus> tweets = twitterService.ListTweetsOnFriendsTimeline();
         foreach (TwitterStatus tweet in tweets)
         {
             ListBoxTweets.Items.Add("[" + tweet.CreatedDate + "] --> " + tweet.User.ScreenName + " says: " + tweet.Text + ".");
