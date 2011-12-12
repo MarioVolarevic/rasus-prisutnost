@@ -5,12 +5,18 @@ using System.Text;
 using System.Drawing;
 using System.Net;
 using System.IO;
+using System.Threading;
 namespace gowalaWarp2
 {  
     public enum authentication
     {
         required,notRequired
     };
+    //public struct ThreadParams
+    //{
+    //    authentication aut;
+    //    string alias;
+    //}
     public class Gowalla
     {
         static readonly string key = "5035f27dc85a407190c3cb290f71a724";
@@ -22,6 +28,7 @@ namespace gowalaWarp2
         string passWord;       
         string alias;
         public List<Friend> friends = new List<Friend>();
+        List<Thread> catchFriData = new List<Thread>();
 
         public Gowalla(string userName, string passWord)
         {
@@ -56,8 +63,8 @@ namespace gowalaWarp2
             #endregion
             for(int i = 0;i<alias.Count();i++)
             {
-                //System.Threading.Thread newThread = new System.Threading.Thread(
-                friends.Add(fetchFriendData(authentication.notRequired, alias[i]));
+                //catchFriData.Add(new ParameterizedThreadStart(param));
+                friends.Add(fetchFriendData(authentication.required, alias[i]));
             }
             return friends;
         }
