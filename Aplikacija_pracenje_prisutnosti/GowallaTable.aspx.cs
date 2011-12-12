@@ -9,19 +9,29 @@ public partial class GowallaTable : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        HttpCookie cookie = Request.Cookies["userID"];
-        string userId = cookie.Value;
+        //HttpCookie cookie = Request.Cookies["userID"];
+        //string userId = cookie.Value;
 
-        GridView1.DataSource = UserX.listOfAllUser[userId].friends;
-        GridView1.DataBind();
+        if (Session["GowallaUsername"] == null || Session["GowallaPassword"] == null)
+        {
+            Response.Redirect(@"~\GowallaLogIn.aspx");
+        }
+        else
+        {
+            string id = Session["username"].ToString() + Session["password"].ToString();
+            GridView1.DataSource = UserX.listOfAllUser[id].friends;
+            GridView1.DataBind();
+        }
+
+       
 
 
     }
 
 
     protected void ImageButtonTwitter_Click(object sender, ImageClickEventArgs e)
-    {
-        Page.Response.Redirect(@"~\TwitterTable.aspx");
+    {       
+            Page.Response.Redirect(@"~\TwitterTable.aspx");       
     }
     protected void ImageButtonGoogle_Click(object sender, ImageClickEventArgs e)
     {
