@@ -23,7 +23,7 @@ public partial class _Default : System.Web.UI.Page
         if(Request.UrlReferrer!=null)
             previousUrl=Request.UrlReferrer.AbsolutePath;
             //Aplikacija_pracenje_prisutnosti/LinkedInTable.aspx
-        if (previousUrl.CompareTo("\\wwwroot\\LinkedInTable.aspx")!=0)
+        if (previousUrl.CompareTo("/LinkedInTable.aspx") != 0)
         {
 
 
