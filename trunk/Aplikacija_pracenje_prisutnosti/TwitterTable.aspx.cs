@@ -44,9 +44,18 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void ImageButtonGoogle_Click(object sender, ImageClickEventArgs e)
     {
-        //if (GPlusFriends.CreateInstance() != null)
-            Page.Response.Redirect(@"~\GPlusTable.aspx");
-        //else
-        //    Page.Response.Redirect(@"~\GPlusLogIn.aspx");
+        Page.Response.Redirect(@"~\GPlusTable.aspx");
+    }
+    protected void ImageButtonFacebook_Click(object sender, ImageClickEventArgs e)
+    {
+        Page.Response.Redirect(@"~\Default.aspx");
+    }
+    protected void ImageButtonGowalla_Click(object sender, ImageClickEventArgs e)
+    {
+        Page.Response.Redirect(@"~\GowallaTable.aspx");
+    }
+    protected void ImageButtonLinkedIn_Click(object sender, ImageClickEventArgs e)
+    {
+        Page.Response.Redirect(@"~\LinkedInLogIn.aspx");
     }
 }

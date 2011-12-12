@@ -35,15 +35,6 @@ public partial class _Default : System.Web.UI.Page
               
         Page.Response.Redirect(@"~\TwitterTable.aspx");
     }
-    protected void ImageButtonGoogle_Click(object sender, ImageClickEventArgs e)
-    {
-        Page.Response.Redirect(@"~\GPlusTable.aspx");
-    }
-
-    protected void ImageButtonGowalla_Click(object sender, ImageClickEventArgs e)
-    {
-        Page.Response.Redirect(@"~\GowallaLogIn.aspx");
-    }
 
     private void CreateAuthUrl()
     {
@@ -51,6 +42,26 @@ public partial class _Default : System.Web.UI.Page
         Session["TwitterRequestToken"] = requestToken;
         authUrl = twitterService.GetAuthorizationUrl(requestToken);
         authUrl = Page.ResolveClientUrl(authUrl);
+    }
+
+    protected void ImageButtonLinkedIn_Click(object sender, ImageClickEventArgs e)
+    {
+        Page.Response.Redirect(@"~\LinkedInLogIn.aspx");
+    }
+
+    protected void ImageButtonFacebook_Click(object sender, ImageClickEventArgs e)
+    {
+        Page.Response.Redirect(@"~\Default.aspx");
+    }
+
+    protected void ImageButtonGoogle_Click(object sender, ImageClickEventArgs e)
+    {
+        Page.Response.Redirect(@"~\GPlusTable.aspx");
+    }
+
+    protected void ImageButtonGowalla_Click(object sender, ImageClickEventArgs e)
+    {
+        Page.Response.Redirect(@"~\GowallaTable.aspx");
     }
 
 }
