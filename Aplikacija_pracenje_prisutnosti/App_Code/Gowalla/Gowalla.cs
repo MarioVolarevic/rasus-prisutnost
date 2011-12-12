@@ -19,7 +19,7 @@ namespace gowalaWarp2
     //}
     public class Gowalla
     {
-        const int STUPID_DELAY = 5010;
+        const int STUPID_DELAY = 1001;
         static readonly string key = "5035f27dc85a407190c3cb290f71a724";
         string firstName; //user
         string lastName;
