@@ -8,22 +8,22 @@ using gowalaWarp2;
 
 public partial class GowallaLogIn : System.Web.UI.Page
 {
-    private string userId;
+   // private string userId;
     protected void Page_Load(object sender, EventArgs e)
     {
-        HttpCookie cookie = Request.Cookies["userID"];
+        //HttpCookie cookie = Request.Cookies["userID"];
 
-        this.userId = cookie.Value;
-        if (UserX.listOfAllUser.ContainsKey(userId))
-        {
-            Page.Response.Redirect(@"~\GowallaTable.aspx");
-        }
+        //this.userId = cookie.Value;
+        //if (UserX.listOfAllUser.ContainsKey(userId))
+        //{
+        //    Page.Response.Redirect(@"~\GowallaTable.aspx");
+        //}      
 
     }
 
     protected void ImageButtonTwitter_Click(object sender, ImageClickEventArgs e)
-    {
-        Page.Response.Redirect(@"~\TwitterTable.aspx");
+    {       
+            Page.Response.Redirect(@"~\TwitterTable.aspx");      
     }
     protected void ImageButtonGoogle_Click(object sender, ImageClickEventArgs e)
     {
@@ -46,9 +46,17 @@ public partial class GowallaLogIn : System.Web.UI.Page
             LabelError.Text = "Wrong username and/or password";
         }
         else
-        {
-            UserX.listOfAllUser.Add(userId, newUser);
-            Page.Response.Redirect(@"~\GowallaTable.aspx");
+        {    
+            string user = TextBoxUsername.Text + TextBoxPassword.Text;
+            if (UserX.listOfAllUser[user] == null)
+            {
+                UserX.listOfAllUser.Add(TextBoxUsername.Text + TextBoxPassword.Text, newUser);
+            }
+            
+            Session["GowallaUsername"] = TextBoxUsername.Text;
+            Session["GowallaPassword"] = TextBoxPassword.Text;          
+            
+            Response.Redirect(@"~\GowallaTable.aspx");
         }
     }
 }
