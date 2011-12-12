@@ -5,6 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <style type="text/css">
+
+        .style2
+        {
+            font-size: x-large;
+        }
+        </style>
 </head>
 <body style="height: 438px">
     <form id="form1" runat="server">
@@ -53,9 +60,25 @@
         <br />
         <br />
         <br />
+     <div class="style2" 
+        
+        
+        
+        
+        style="height: 457px; color: #789CEF; width: 760px; background-color: #EFEFEF; font-weight: 700; font-size: medium; font-family: Calibri; text-align: center;">
+
+         &nbsp;&nbsp;&nbsp;
+         <br />
+         <asp:ListBox ID="ListBoxGowalla" runat="server" Height="269px" Width="622px" 
+             style="font-family: Calibri">
+         </asp:ListBox>
+
+         <br />
+         <br />
+&nbsp;<br />
+
+    </div>
         <br />
-        <asp:GridView ID="GridView1" runat="server" Height="215px" Width="326px">
-        </asp:GridView>
     </div>
     
     </form>
