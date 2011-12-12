@@ -12,7 +12,7 @@ using TweetSharp.Twitter.Service;
 public partial class _Default : System.Web.UI.Page 
 {
     string authUrl;
-    TwitterService twitterService = new TwitterService(TwitterAcount.ClientInfo);
+    TwitterService twitterService = new TwitterService(TwitterAppInfo.ClientInfo);
     OAuthToken requestToken;
     OAuthToken accessToken = new OAuthToken();
 
@@ -29,10 +29,9 @@ public partial class _Default : System.Web.UI.Page
     protected void ButtonAuthorize_Click(object sender, EventArgs e)
     {
         OAuthToken accessToken;
-        accessToken = twitterService.GetAccessToken((OAuthToken) Session["TwitterReqToken"], this.TextBoxPin.Text);
+        accessToken = twitterService.GetAccessToken((OAuthToken) Session["TwitterRequestToken"], this.TextBoxPin.Text);
 
-        Session["TwitterToken"] = accessToken.Token;
-        Session["TwitterTokenSecret"] = accessToken.TokenSecret;
+        Session["TwitterAccessToken"] = accessToken;
               
         Page.Response.Redirect(@"~\TwitterTable.aspx");
     }
@@ -49,7 +48,7 @@ public partial class _Default : System.Web.UI.Page
     private void CreateAuthUrl()
     {
         requestToken = twitterService.GetRequestToken();
-        Session["TwitterReqToken"] = requestToken;
+        Session["TwitterRequestToken"] = requestToken;
         authUrl = twitterService.GetAuthorizationUrl(requestToken);
         authUrl = Page.ResolveClientUrl(authUrl);
     }

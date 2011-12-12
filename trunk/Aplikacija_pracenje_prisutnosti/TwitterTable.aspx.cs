@@ -12,17 +12,18 @@ using TweetSharp.Twitter.Service;
 
 public partial class _Default : System.Web.UI.Page 
 {
-    TwitterService twitterService = new TwitterService(TwitterAcount.ClientInfo);
+    TwitterService twitterService = new TwitterService(TwitterAppInfo.ClientInfo);
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["TwitterToken"] == null || Session["TwitterTokenSecret"] == null)
+        if (Session["TwitterAccessToken"] == null)
         {
             Response.Redirect(@"~\TwitterLogIn.aspx");
         }
         else
         {
-            twitterService.AuthenticateWith(Session["TwitterToken"].ToString(), Session["TwitterTokenSecret"].ToString());
+            OAuthToken accessToken = (OAuthToken)Session["TwitterAccessToken"];
+            twitterService.AuthenticateWith(accessToken.Token, accessToken.TokenSecret);
             ListBoxTweets.Items.Clear();
             refreshFriendTweets();
         }
