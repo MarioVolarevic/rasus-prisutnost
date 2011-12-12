@@ -44,15 +44,25 @@ public partial class _Default : CanvasPage
         }
         //vjekin kod
 
-        GridView1.DataSource = FacebookClient.Connect(Api, FBUserID);
-        GridView1.DataBind();
+        List<FacebookTable> table = FacebookClient.Connect(Api, FBUserID);
+        foreach (FacebookTable item in table) 
+        {
+            ListBoxFB.Items.Add(item.Name + " " + item.FBStatus);
+        }
+        //GridView1.DataSource = FacebookClient.Connect(Api, FBUserID);
+        //GridView1.DataBind();
 
     }
 
     protected void ImageButtonFacebook_Click(object sender, ImageClickEventArgs e) 
     {
-        GridView1.DataSource = FacebookClient.Connect(Api, FBUserID);
-        GridView1.DataBind();    
+        List<FacebookTable> table = FacebookClient.Connect(Api, FBUserID);
+        foreach (FacebookTable item in table)
+        {
+            ListBoxFB.Items.Add(item.Name + " " + item.FBStatus);
+        }
+        //GridView1.DataSource = FacebookClient.Connect(Api, FBUserID);
+        //GridView1.DataBind();    
     }
 
     protected void ImageButtonTwitter_Click(object sender, ImageClickEventArgs e)

@@ -80,11 +80,11 @@
          <asp:TextBox ID="TextBoxPassword" runat="server" TextMode="Password"></asp:TextBox>
          <br />
          <asp:Button ID="ButtonLogIn" runat="server" Height="24px" Text="Log In" 
-             Width="108px" />
-
-        <asp:GridView ID="GridView1" runat="server" Height="215px" Width="326px">
-        </asp:GridView>
+             Width="108px" />       
     </div>
+     <asp:ListBox ID="ListBoxFB" runat="server" Height="269px" Width="622px" 
+             style="font-family: Calibri">
+         </asp:ListBox>
     </form>
 </body>
 </html>
