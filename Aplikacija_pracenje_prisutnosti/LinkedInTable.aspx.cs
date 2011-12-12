@@ -147,6 +147,7 @@ public partial class _Default : System.Web.UI.Page
             num = osobe.Count;
         for (int i = 0; i < num; i++)
         {
+            //ListBox1.Items.Add("[" + tweet.CreatedDate + "] --> " + tweet.User.ScreenName + " says: " + tweet.Text + ".");
             ListBox1.Items.Add(Status(osobe.ElementAt(i).name, osobe.ElementAt(i).surname));
         }
     }

@@ -46,23 +46,23 @@
         style="height: 73px; color: #789CEF; width: 760px; background-color: #EFEFEF; font-weight: 700; font-size: xx-small; text-align: center;">
         &nbsp;<span class="style4">Select Social Network: </span>&nbsp;<br />
         &nbsp;&nbsp;
-        <asp:ImageButton ID="ImageButton1" runat="server" Height="30px" 
+        <asp:ImageButton ID="ImageButtonFacebook" runat="server" Height="30px" 
             ImageUrl="~/Images/FacebookLogo.png" Width="30px" 
             onclick="ImageButtonFacebook_Click" />
 &nbsp;
-        <asp:ImageButton ID="ImageButton2" runat="server" Height="30px" 
+        <asp:ImageButton ID="ImageButtonGoogle" runat="server" Height="30px" 
             ImageUrl="~/Images/GoogleLogo.png" Width="30px" 
             onclick="ImageButtonGoogle_Click"  />
 &nbsp;
-        <asp:ImageButton ID="ImageButton3" runat="server" Height="30px" 
+        <asp:ImageButton ID="ImageButtonTwitter" runat="server" Height="30px" 
             ImageUrl="~/Images/TwitterLogo.png" Width="30px" 
             onclick="ImageButtonTwitter_Click" />
 &nbsp;&nbsp;
-        <asp:ImageButton ID="ImageButton4" runat="server" Height="30px" 
+        <asp:ImageButton ID="ImageButtonGowalla" runat="server" Height="30px" 
             ImageUrl="~/Images/GowallaLogo.png" Width="30px" 
             onclick="ImageButtonGowalla_Click" />
 &nbsp;
-        <asp:ImageButton ID="ImageButton5" runat="server" Height="30px" 
+        <asp:ImageButton ID="ImageButtonLinkedIn" runat="server" Height="30px" 
             ImageUrl="~/Images/LinkedInLogopngSelected.png" Width="30px" 
             onclick="ImageButton5_Click" />
         <br />
