@@ -25,7 +25,7 @@ public partial class GPlusLogIn : System.Web.UI.Page
     }
     protected void ImageButtonFacebook_Click(object sender, ImageClickEventArgs e)
     {
-        IframeHelper.IframeRedirect("Default.aspx", true, true);
+        IframeHelper.IframeRedirect("", true, true);
     }
 
     protected void ImageButtonGowalla_Click(object sender, ImageClickEventArgs e)
