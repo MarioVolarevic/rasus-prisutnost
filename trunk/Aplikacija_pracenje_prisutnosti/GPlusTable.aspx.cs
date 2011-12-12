@@ -69,13 +69,15 @@ public partial class GPlusTable : System.Web.UI.Page
                 {
                     fullOutput += " (Chatting): ";
                 }
+                fullOutput += cF.StatusMessage;
+                boxActiveFriends.Items.Add(fullOutput);
             }
-            else
-            {
-                fullOutput += " (Offline): ";
-            }
-            fullOutput += cF.StatusMessage;
-            boxActiveFriends.Items.Add(fullOutput);
+            //else
+            //{
+            //    fullOutput += " (Offline): ";
+            //}
+            //fullOutput += cF.StatusMessage;
+            //boxActiveFriends.Items.Add(fullOutput);
         }
     }
 
