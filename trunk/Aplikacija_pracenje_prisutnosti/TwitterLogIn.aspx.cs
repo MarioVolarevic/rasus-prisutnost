@@ -19,6 +19,7 @@ public partial class _Default : System.Web.UI.Page
 
     protected void ButtonGetPin_Click(object sender, EventArgs e)
     {
+        CreateAuthUrl();
         Process.Start(authUrl);
     }
 
@@ -43,7 +44,22 @@ public partial class _Default : System.Web.UI.Page
         Page.Response.Redirect(@"~\GowallaLogIn.aspx");
     }
 
-    protected void ButtonGetPin_PreRender(object sender, EventArgs e)
+    //protected void ButtonGetPin_PreRender(object sender, EventArgs e)
+    //{
+    //    TwitterClientInfo twitterClientInfo = new TwitterClientInfo();
+    //    twitterClientInfo.ConsumerKey = TwitterAcount.ConsumerKey;
+    //    twitterClientInfo.ConsumerSecret = TwitterAcount.ConsumerSecret;
+
+    //    TwitterAcount.twitterService = new TwitterService(twitterClientInfo);
+
+    //    TwitterAcount.requestToken = TwitterAcount.twitterService.GetRequestToken();
+    //    authUrl = TwitterAcount.twitterService.GetAuthorizationUrl(TwitterAcount.requestToken);
+
+    //    authUrl = Page.ResolveClientUrl(authUrl);
+    //    ButtonGetPin.OnClientClick = "window.open('" + authUrl + "'); return false;";
+    //}
+
+    private void CreateAuthUrl()
     {
         TwitterClientInfo twitterClientInfo = new TwitterClientInfo();
         twitterClientInfo.ConsumerKey = TwitterAcount.ConsumerKey;
@@ -55,6 +71,6 @@ public partial class _Default : System.Web.UI.Page
         authUrl = TwitterAcount.twitterService.GetAuthorizationUrl(TwitterAcount.requestToken);
 
         authUrl = Page.ResolveClientUrl(authUrl);
-        ButtonGetPin.OnClientClick = "window.open('" + authUrl + "'); return false;";
     }
+
 }

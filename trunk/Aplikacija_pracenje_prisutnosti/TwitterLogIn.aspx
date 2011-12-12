@@ -78,8 +78,7 @@
          <br />
          <br />
          <asp:Button ID="ButtonGetPin" runat="server" style="font-family: Calibri" 
-             Text="Get PIN" Width="79px" onclick="ButtonGetPin_Click" 
-             onprerender="ButtonGetPin_PreRender" />
+             Text="Get PIN" Width="79px" onclick="ButtonGetPin_Click" OnClientClick="aspnetForm.target ='_blank';"/>
          <br />
          <br />
          PIN: 
