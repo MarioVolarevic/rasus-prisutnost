@@ -12,9 +12,9 @@ using TweetSharp.Twitter.Service;
 public partial class _Default : System.Web.UI.Page 
 {
     string authUrl;
-    TwitterService twitterService;
-    OAuthToken requestToken;
-    OAuthToken accessToken;
+    TwitterService twitterService = new TwitterService(TwitterAcount.ClientInfo);
+    OAuthToken requestToken = new OAuthToken();
+    OAuthToken accessToken = new OAuthToken();
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -66,7 +66,6 @@ public partial class _Default : System.Web.UI.Page
 
     private void CreateAuthUrl()
     {
-        twitterService = new TwitterService(TwitterAcount.ClientInfo);
         requestToken = twitterService.GetRequestToken();
         authUrl = twitterService.GetAuthorizationUrl(requestToken);
 

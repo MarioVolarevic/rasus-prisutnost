@@ -23,10 +23,7 @@ public partial class GowallaLogIn : System.Web.UI.Page
 
     protected void ImageButtonTwitter_Click(object sender, ImageClickEventArgs e)
     {
-        if (TwitterAcount.logedIn == true)
-            Page.Response.Redirect(@"~\TwitterTable.aspx");
-        else
-            Page.Response.Redirect(@"~\TwitterLogIn.aspx");
+        Page.Response.Redirect(@"~\TwitterTable.aspx");
     }
     protected void ImageButtonGoogle_Click(object sender, ImageClickEventArgs e)
     {
