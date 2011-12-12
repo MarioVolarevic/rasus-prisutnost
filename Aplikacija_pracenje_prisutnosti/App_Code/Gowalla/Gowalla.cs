@@ -74,6 +74,7 @@ namespace gowalaWarp2
         }
         public HttpWebRequest createRequest(string url, authentication aut)
         {
+            int stopWatch = 0;
             TryLabel:
             try
             {
@@ -90,8 +91,12 @@ namespace gowalaWarp2
             }
             catch (WebException e)
             {
-                Thread.Sleep(1);
-                goto TryLabel;
+                if (stopWatch < 3)
+                {
+                    stopWatch++;
+                    Thread.Sleep(1000);
+                    goto TryLabel;
+                }
             }
 
             return null;
