@@ -41,7 +41,6 @@ public partial class GPlusTable : System.Web.UI.Page
             ewh.WaitOne(30); 
         }
 
-        //boxActiveFriends.DataSource = null;
         boxActiveFriends.Items.Clear();
         ewh.WaitOne(100);
         friends = gPlusFriends.GetAllFriends();

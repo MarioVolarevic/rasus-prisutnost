@@ -90,7 +90,8 @@
          <asp:ListBox ID="boxActiveFriends" runat="server" Height="163px" Width="665px">
          </asp:ListBox>
 
-         <asp:TextBox ID="BoxStatusMessage" runat="server"></asp:TextBox>
+         <asp:TextBox ID="BoxStatusMessage" runat="server" 
+             ToolTip="Custom Status Message Text"></asp:TextBox>
 &nbsp;&nbsp;&nbsp;
          <asp:DropDownList ID="AvailList" runat="server">
              <asp:ListItem Selected="True">Online</asp:ListItem>
