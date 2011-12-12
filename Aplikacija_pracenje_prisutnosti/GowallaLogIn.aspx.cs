@@ -17,7 +17,8 @@ public partial class GowallaLogIn : System.Web.UI.Page
         //if (UserX.listOfAllUser.ContainsKey(userId))
         //{
         //    Page.Response.Redirect(@"~\GowallaTable.aspx");
-        //}      
+        //}   
+      
 
     }
 
@@ -41,20 +42,15 @@ public partial class GowallaLogIn : System.Web.UI.Page
     protected void ButtonLogIn_Click(object sender, EventArgs e)
     {   
             string user = TextBoxUsername.Text + TextBoxPassword.Text;
+           
 
-            HttpCookie cookie = Request.Cookies["timeStamp"];
-            if (cookie != null)
-            {
-                DateTime lastTime = DateTime.Parse(cookie.Value);
-                DateTime now = DateTime.Now;
+           
 
-                TimeSpan minus = lastTime.Subtract(now);
 
-            }
+            //if (!(UserX.listOfAllUser.ContainsKey(user)))
+            //{
 
-            if (!(UserX.listOfAllUser.ContainsKey(user)))
-            {
-
+               
                 Gowalla newUser = new Gowalla(TextBoxUsername.Text, TextBoxPassword.Text);
                 if (newUser.Status == false)
                 {
@@ -62,25 +58,23 @@ public partial class GowallaLogIn : System.Web.UI.Page
                 }
                 else
                 {
-                    UserX.listOfAllUser.Add(TextBoxUsername.Text + TextBoxPassword.Text, newUser);
+                   // UserX.listOfAllUser.Add(TextBoxUsername.Text + TextBoxPassword.Text, newUser);
                     Session["GowallaUsername"] = TextBoxUsername.Text;
                     Session["GowallaPassword"] = TextBoxPassword.Text;
 
-                    HttpCookie cookie2 = new HttpCookie("timeStamp");
-                    cookie2.Value = DateTime.Now.ToString();
-                    Response.Cookies.Add(cookie2);
+                   
 
                     Response.Redirect(@"~\GowallaTable.aspx");
                 }
 
-            }
-            else
-            {
+            //}
+            //else
+            //{
                 
-                Session["GowallaUsername"] = TextBoxUsername.Text;
-                Session["GowallaPassword"] = TextBoxPassword.Text;
-                Response.Redirect(@"~\GowallaTable.aspx");
-            }
+            //    Session["GowallaUsername"] = TextBoxUsername.Text;
+            //    Session["GowallaPassword"] = TextBoxPassword.Text;
+            //    Response.Redirect(@"~\GowallaTable.aspx");
+            //}
             
            
         
