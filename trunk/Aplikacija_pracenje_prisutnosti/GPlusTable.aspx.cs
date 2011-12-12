@@ -33,8 +33,8 @@ public partial class GPlusTable : System.Web.UI.Page
                 Response.Redirect(@"~\GPlusLogIn.aspx");
         }
         
-        if (gPlusFriends.GetAllFriends().Count == 0)
-            ewh.WaitOne();
+        //if (gPlusFriends.GetAllFriends().Count == 0)
+        //    ewh.WaitOne();
         ewh.WaitOne();
         for (int i = 0; i < gPlusFriends.GetAllFriends().Count; i++)
         {
@@ -99,7 +99,7 @@ public partial class GPlusTable : System.Web.UI.Page
     }
     protected void ImageButtonFacebook_Click(object sender, ImageClickEventArgs e)
     {
-        IframeHelper.IframeRedirect("/Default.aspx", true, true);
+        IframeHelper.IframeRedirect("", true, true);
     }
     protected void StatusButton_Click(object sender, EventArgs e)
     {

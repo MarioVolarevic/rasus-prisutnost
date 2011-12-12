@@ -14,7 +14,6 @@ public class GPlusFriends : System.Web.UI.Page
 {
     XmppClientConnection xmppConn;
     List<GFriend> allFriendsList = new List<GFriend>();
-    List<string> activeFriendsList = new List<string>();
 
     //Dictionary<string, string> activeFriendsList = new Dictionary<string, string>();
     //static private GPlusFriends instance;
@@ -36,10 +35,6 @@ public class GPlusFriends : System.Web.UI.Page
     //    else return instance;
     //}
 
-    public List<string> GetActiveFriends()
-    {
-        return activeFriendsList;
-    }
     public List<GFriend> GetAllFriends()
     {
         return allFriendsList;
