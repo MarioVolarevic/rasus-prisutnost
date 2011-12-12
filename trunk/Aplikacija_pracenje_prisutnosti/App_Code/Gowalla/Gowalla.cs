@@ -88,6 +88,7 @@ namespace gowalaWarp2
             Friend newFriend = new Friend(null, null);
             StreamReader reader = null;
             string result = "";
+            String stampsURL = null;
 
             HttpWebRequest request = createRequest("http://api.gowalla.com/users/" + alias.Replace(" ", ""), aut);
             try
@@ -115,11 +116,31 @@ namespace gowalaWarp2
                         row.Contains("stamps_url"));
             });
 
-            
 
-            newFriend.firstName = rez.ElementAt(2).Split('"')[3];
-            newFriend.lastName = rez.ElementAt(1).Split('"')[3];
-            String stampsURL = rez.ElementAt(0).Split('"')[3];
+            try
+            {
+                newFriend.firstName = rez.ElementAt(2).Split('"')[3];
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                newFriend.firstName = "Ja sam zlocest";
+            }
+            try
+            {
+                newFriend.lastName = rez.ElementAt(1).Split('"')[3];
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                newFriend.lastName = "Jako, stašno jako";
+            }
+            try
+            {
+                stampsURL = rez.ElementAt(0).Split('"')[3];
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                stampsURL = "Nema zemlje za starce";
+            }
 
             //String imUrl = data.First(x=>x.Contains("image_url")).Split('"')[3];
             //Stream imageStream = getResource(imUrl);
