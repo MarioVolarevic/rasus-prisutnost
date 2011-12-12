@@ -138,4 +138,16 @@ public partial class _Default : System.Web.UI.Page
     {
         Response.Redirect(@"~\Default.aspx");
     }
+    protected void ImageButton5_Click(object sender, ImageClickEventArgs e)
+    {
+        ListBox1.Items.Clear();
+        List<Person> osobe = GetAllConections();
+        int num = 0;
+        if (osobe != null)
+            num = osobe.Count;
+        for (int i = 0; i < num; i++)
+        {
+            ListBox1.Items.Add(Status(osobe.ElementAt(i).name, osobe.ElementAt(i).surname));
+        }
+    }
 }
