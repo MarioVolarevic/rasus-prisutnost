@@ -24,15 +24,15 @@ public partial class _Default : CanvasPage
     
     protected void Page_Load(object sender, EventArgs e)
     {
-        HttpCookie cookie = new HttpCookie("userID");
-        HttpCookie cookieRet = Request.Cookies["userID"];
+        //HttpCookie cookie = new HttpCookie("userID");
+        //HttpCookie cookieRet = Request.Cookies["userID"];
 
-        if (cookieRet == null)
-        {            
-            cookie.Value = UserX.counter.ToString();
-            UserX.counter++;
-            Response.Cookies.Add(cookie);
-        }
+        //if (cookieRet == null)
+        //{            
+        //    cookie.Value = UserX.counter.ToString();
+        //    UserX.counter++;
+        //    Response.Cookies.Add(cookie);
+        //}
         //vjekin kod
         if (!IsPostBack)
         {
