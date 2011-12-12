@@ -28,7 +28,7 @@ namespace gowalaWarp2
         string passWord;       
         string alias;
         public List<Friend> friends = new List<Friend>();
-        List<Thread> catchFriData = new List<Thread>();
+      // List<Thread> catchFriData = new List<Thread>();
 
         public Gowalla(string userName, string passWord)
         {
@@ -117,43 +117,31 @@ namespace gowalaWarp2
             });
 
 
-            try
+            if (rez.Count() == 3)
             {
                 newFriend.firstName = rez.ElementAt(2).Split('"')[3];
-            }
-            catch (ArgumentOutOfRangeException e)
-            {
-                newFriend.firstName = "Ja sam zlocest";
-            }
-            try
-            {
                 newFriend.lastName = rez.ElementAt(1).Split('"')[3];
-            }
-            catch (ArgumentOutOfRangeException e)
-            {
-                newFriend.lastName = "Jako, stašno jako";
-            }
-            try
-            {
                 stampsURL = rez.ElementAt(0).Split('"')[3];
+                newFriend.alias = alias;
+                newFriend.lastCheckin = lastCheckin(stampsURL, aut);
+                return newFriend;
             }
-            catch (ArgumentOutOfRangeException e)
+            else if (rez.Count() == 2)
             {
-                stampsURL = "Nema zemlje za starce";
-            }
+                newFriend.firstName = rez.ElementAt(1).Split('"')[3];
+                newFriend.lastName = rez.ElementAt(0).Split('"')[3];               
+                newFriend.alias = alias;                
+                return newFriend;
 
+            }
+            else return newFriend;
+            
+            
             //String imUrl = data.First(x=>x.Contains("image_url")).Split('"')[3];
             //Stream imageStream = getResource(imUrl);
             //newFriend.avatar = Image.FromStream(imageStream);
 
-            newFriend.alias = alias;
-
-            newFriend.lastCheckin = lastCheckin(stampsURL, aut);
-
-
-
-
-            return newFriend;
+            
         }
 
         private DateTime lastCheckin(string url, authentication aut)
