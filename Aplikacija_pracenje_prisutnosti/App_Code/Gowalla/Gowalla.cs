@@ -51,7 +51,8 @@ namespace gowalaWarp2
             HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
             StreamReader read = new StreamReader(resp.GetResponseStream());
             String oneLine;            
-            List<string> alias = new List<string>();          
+            List<string> alias = new List<string>();
+           
             while ((oneLine = read.ReadLine() )!= null)
             {
                 if (oneLine.Contains("user-link primary-link"))
@@ -59,28 +60,41 @@ namespace gowalaWarp2
                     alias.Add(oneLine.Split('/')[2].Split('"')[0]);                   
                 }                
             }
+           
           
             #endregion
+            System.Diagnostics.Stopwatch sat = new System.Diagnostics.Stopwatch();
+            sat.Start();
             for(int i = 0;i<alias.Count();i++)
-            {
-                //catchFriData.Add(new ParameterizedThreadStart(param));
+            {                
                 friends.Add(fetchFriendData(authentication.required, alias[i]));
             }
+            long proslo = sat.ElapsedMilliseconds;
             return friends;
         }
         public HttpWebRequest createRequest(string url, authentication aut)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            if (aut == authentication.required)
+            TryLabel:
+            try
             {
-                request.Credentials = new NetworkCredential(userName, passWord);
-                request.Headers.Add("Authorization", "Basic" + Convert.ToBase64String(new ASCIIEncoding().GetBytes(userName + passWord)));
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                if (aut == authentication.required)
+                {
+                    request.Credentials = new NetworkCredential(userName, passWord);
+                    request.Headers.Add("Authorization", "Basic" + Convert.ToBase64String(new ASCIIEncoding().GetBytes(userName + passWord)));
+                }
+                request.ContentType = "application/json";
+                request.Accept = "application/json";
+                request.Headers.Add("X-Gowalla-API-Key:" + Gowalla.key);
+                return request;
             }
-            request.ContentType = "application/json";
-            request.Accept = "application/json";
-            request.Headers.Add("X-Gowalla-API-Key:" + Gowalla.key);
-            
-            return request;
+            catch (WebException e)
+            {
+                Thread.Sleep(1);
+                goto TryLabel;
+            }
+
+            return null;
         }
 
         private Friend fetchFriendData(authentication aut, string alias)
