@@ -91,7 +91,7 @@ namespace gowalaWarp2
             }
             catch (WebException e)
             {
-                if (stopWatch < 3)
+                if (stopWatch < 5)
                 {
                     stopWatch++;
                     Thread.Sleep(1000);
@@ -169,19 +169,32 @@ namespace gowalaWarp2
 
             StreamReader reader;
             String rightLine = null;
-            
-            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+            int stopWatch = 0;
+            TryLabel2:
+            try
             {
-                reader = new StreamReader(response.GetResponseStream());
-                String[] allLines = reader.ReadToEnd().Split(',');
-                foreach(String oneLine in allLines)
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                 {
-                    if (oneLine.Contains("last_checkin_at"))
+                    reader = new StreamReader(response.GetResponseStream());
+                    String[] allLines = reader.ReadToEnd().Split(',');
+                    foreach (String oneLine in allLines)
                     {
-                        rightLine = oneLine;
-                        break;
-                    }
+                        if (oneLine.Contains("last_checkin_at"))
+                        {
+                            rightLine = oneLine;
+                            break;
+                        }
 
+                    }
+                }
+            }
+            catch(WebException  e)
+            {
+                if (stopWatch < 5)
+                {
+                    stopWatch++;
+                    Thread.Sleep(1000);
+                    goto TryLabel2;
                 }
             }
             if (rightLine == null)
@@ -210,8 +223,11 @@ namespace gowalaWarp2
         private string fetchBasicUserData(authentication aut)
         {
             HttpWebRequest request = createRequest("http://api.gowalla.com/users/me", aut);
+            int stopWatch = 0;
+            TryLabel3:
             try
             {
+           
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                 {
                     
@@ -234,9 +250,18 @@ namespace gowalaWarp2
                 
             }
             catch (System.Net.WebException e)
-            {
-                status = false;
-                return "Greška";
+            {                
+                if (stopWatch < 5)
+                {
+                    stopWatch++;
+                    Thread.Sleep(1000);
+                    goto TryLabel3;
+                }
+                else
+                {
+                    status = false;
+                    return "greška";
+                }            
             }
         }
 
