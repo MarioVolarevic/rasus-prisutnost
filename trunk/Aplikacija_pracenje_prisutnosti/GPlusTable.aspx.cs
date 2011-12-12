@@ -99,9 +99,7 @@ public partial class GPlusTable : System.Web.UI.Page
     }
     protected void ImageButtonFacebook_Click(object sender, ImageClickEventArgs e)
     {
-        //Response.Redirect(@"~\Default.aspx");
-        IframeHelper.IframeRedirect(@"http://apps.facebook.com/lab_profil_test/Default.aspx", false, true);
-        //IframeHelper.IframeRedirect(@"~\Default.aspx", false, false);
+        IframeHelper.IframeRedirect("/Default.aspx", true, true);
     }
     protected void StatusButton_Click(object sender, EventArgs e)
     {
