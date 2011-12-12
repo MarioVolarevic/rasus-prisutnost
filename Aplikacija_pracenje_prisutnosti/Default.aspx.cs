@@ -14,23 +14,27 @@ public partial class _Default : CanvasPage
 {
     protected void Page_PreInit(object sender, EventArgs e) 
     {
-        //RequireLogin = true;
-        ExtendedPermissions = "friends_online_presence";
-        CheckExtendedPermissions = true;    
+        if (Session["FBLogInReq"] == null)
+        {
+            RequireLogin = true;
+            Session["FBLogInReq"] = "OK";
+            ExtendedPermissions = "friends_online_presence";
+            CheckExtendedPermissions = true;
+        }
     }
     
     protected void Page_Load(object sender, EventArgs e)
     {
-        Session["FromPage"] = "FBLogIn";
-
         HttpCookie cookie = new HttpCookie("userID");
         HttpCookie cookieRet = Request.Cookies["userID"];
+
         if (cookieRet == null)
         {            
             cookie.Value = UserX.counter.ToString();
             UserX.counter++;
             Response.Cookies.Add(cookie);
         }
+        //vjekin kod
         GridView1.DataSource = FacebookClient.Connect(Api, FBUserID);
         GridView1.DataBind();
         
