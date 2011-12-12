@@ -27,56 +27,41 @@ public partial class GowallaLogIn : System.Web.UI.Page
             Page.Response.Redirect(@"~\TwitterTable.aspx");      
     }
     protected void ImageButtonGoogle_Click(object sender, ImageClickEventArgs e)
-    {
-        //if (GPlusFriends.CreateInstance() != null)
-            Page.Response.Redirect(@"~\GPlusTable.aspx");
-        //else
-        //    Page.Response.Redirect(@"~\GPlusLogIn.aspx");
+    {       
+            Page.Response.Redirect(@"~\GPlusTable.aspx");       
     }
     protected void ImageButtonLinkedIn_Click(object sender, ImageClickEventArgs e)
-    {
-       
-        Page.Response.Redirect(@"~\LinkedInLogIn.aspx");
-     
+    {       
+        Page.Response.Redirect(@"~\LinkedInLogIn.aspx");     
     }
     protected void ButtonLogIn_Click(object sender, EventArgs e)
-    {   
-            string user = TextBoxUsername.Text + TextBoxPassword.Text;
-           
+    {
+        string user = TextBoxUsername.Text + TextBoxPassword.Text;
 
-           
+        //if (!(UserX.listOfAllUser.ContainsKey(user)))
+        //{
 
+        Gowalla newUser = new Gowalla(TextBoxUsername.Text, TextBoxPassword.Text);
+        if (newUser.Status == false)
+        {
+            LabelError.Text = "Wrong username and/or password";
+        }
+        else
+        {
+            // UserX.listOfAllUser.Add(TextBoxUsername.Text + TextBoxPassword.Text, newUser);
+            Session["GowallaUsername"] = TextBoxUsername.Text;
+            Session["GowallaPassword"] = TextBoxPassword.Text;
+            Response.Redirect(@"~\GowallaTable.aspx");
+        }
 
-            //if (!(UserX.listOfAllUser.ContainsKey(user)))
-            //{
+        //}
+        //else
+        //{
 
-               
-                Gowalla newUser = new Gowalla(TextBoxUsername.Text, TextBoxPassword.Text);
-                if (newUser.Status == false)
-                {
-                    LabelError.Text = "Wrong username and/or password";
-                }
-                else
-                {
-                   // UserX.listOfAllUser.Add(TextBoxUsername.Text + TextBoxPassword.Text, newUser);
-                    Session["GowallaUsername"] = TextBoxUsername.Text;
-                    Session["GowallaPassword"] = TextBoxPassword.Text;
+        //    Session["GowallaUsername"] = TextBoxUsername.Text;
+        //    Session["GowallaPassword"] = TextBoxPassword.Text;
+        //    Response.Redirect(@"~\GowallaTable.aspx");
+        //}
 
-                   
-
-                    Response.Redirect(@"~\GowallaTable.aspx");
-                }
-
-            //}
-            //else
-            //{
-                
-            //    Session["GowallaUsername"] = TextBoxUsername.Text;
-            //    Session["GowallaPassword"] = TextBoxPassword.Text;
-            //    Response.Redirect(@"~\GowallaTable.aspx");
-            //}
-            
-           
-        
     }
 }

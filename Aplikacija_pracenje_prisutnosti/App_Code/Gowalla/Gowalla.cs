@@ -56,6 +56,7 @@ namespace gowalaWarp2
             #endregion
             for(int i = 0;i<alias.Count();i++)
             {
+                //System.Threading.Thread newThread = new System.Threading.Thread(
                 friends.Add(fetchFriendData(authentication.notRequired, alias[i]));
             }
             return friends;

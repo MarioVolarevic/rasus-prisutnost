@@ -8,6 +8,7 @@ using gowalaWarp2;
 
 public partial class GowallaTable : System.Web.UI.Page
 {
+    
     protected void Page_Load(object sender, EventArgs e)
     {
            
@@ -16,14 +17,18 @@ public partial class GowallaTable : System.Web.UI.Page
         {                                      
                 Response.Redirect(@"~\GowallaLogIn.aspx");           
         }
-
-
-        //string user = Session["GowallaUsername"].ToString() + Session["GowallaPassword"].ToString();
-        //GridView1.DataSource = UserX.listOfAllUser[user].friends;
-        Gowalla user = new Gowalla(Session["GowallaUsername"].ToString(), Session["GowallaPassword"].ToString());
-        GridView1.DataSource = user.CatchFriends();
-        GridView1.DataBind();
-
+        /*Svaki put kad kliknete na neki od gumbića (Twitter, Gplus...) napravite POST zahtjev na trenutnu
+         * stranicu na kojoj se nalazite. Ako imate učitavanje podataka - kao što ja imam ovo dolje, to znači da 
+         * će vam se ponovno učitavati podaci PRIJE nego se pokrene npr. ImageButtonTwitter_Click. To znači 
+         * nepotrebno čekanje prije preusmjeravanja na Twitter dio. Zato sam dodao ovo if (Page.IsPostBack == false)
+         * Na twitteru i G+u se događa ista stvar pa, iako se kod njih radi o 1 sekundi koju ušparamo, kod mene je
+         * riječ o 20-tak ušparanih sekundi. :) */
+        if (Page.IsPostBack == false)
+        {
+            Gowalla user = new Gowalla(Session["GowallaUsername"].ToString(), Session["GowallaPassword"].ToString());
+            GridView1.DataSource = user.CatchFriends();
+            GridView1.DataBind();
+        }
 
     }
 
@@ -33,11 +38,8 @@ public partial class GowallaTable : System.Web.UI.Page
             Page.Response.Redirect(@"~\TwitterTable.aspx");       
     }
     protected void ImageButtonGoogle_Click(object sender, ImageClickEventArgs e)
-    {
-        //if (GPlusFriends.CreateInstance() != null)
-            Page.Response.Redirect(@"~\GPlusTable.aspx");
-        //else
-        //    Page.Response.Redirect(@"~\GPlusLogIn.aspx");
+    {      
+            Page.Response.Redirect(@"~\GPlusTable.aspx");       
     }
     protected void ImageButtonLinkedIn_Click(object sender, ImageClickEventArgs e)
     {
