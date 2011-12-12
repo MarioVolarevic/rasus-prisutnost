@@ -13,7 +13,7 @@ public partial class _Default : System.Web.UI.Page
 {
     string authUrl;
     TwitterService twitterService = new TwitterService(TwitterAcount.ClientInfo);
-    static OAuthToken requestToken;
+    OAuthToken requestToken;
     OAuthToken accessToken = new OAuthToken();
 
     protected void Page_Load(object sender, EventArgs e)
@@ -29,7 +29,7 @@ public partial class _Default : System.Web.UI.Page
     protected void ButtonAuthorize_Click(object sender, EventArgs e)
     {
         OAuthToken accessToken;
-        accessToken = twitterService.GetAccessToken(requestToken, this.TextBoxPin.Text);
+        accessToken = twitterService.GetAccessToken((OAuthToken) Session["TwitterReqToken"], this.TextBoxPin.Text);
 
         Session["TwitterToken"] = accessToken.Token;
         Session["TwitterTokenSecret"] = accessToken.TokenSecret;
@@ -38,10 +38,7 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void ImageButtonGoogle_Click(object sender, ImageClickEventArgs e)
     {
-        //if (GPlusFriends.CreateInstance() != null)
-            Page.Response.Redirect(@"~\GPlusTable.aspx");
-        //else
-        //    Page.Response.Redirect(@"~\GPlusLogIn.aspx");
+        Page.Response.Redirect(@"~\GPlusTable.aspx");
     }
 
     protected void ImageButtonGowalla_Click(object sender, ImageClickEventArgs e)
@@ -49,24 +46,10 @@ public partial class _Default : System.Web.UI.Page
         Page.Response.Redirect(@"~\GowallaLogIn.aspx");
     }
 
-    //protected void ButtonGetPin_PreRender(object sender, EventArgs e)
-    //{
-    //    TwitterClientInfo twitterClientInfo = new TwitterClientInfo();
-    //    twitterClientInfo.ConsumerKey = TwitterAcount.ConsumerKey;
-    //    twitterClientInfo.ConsumerSecret = TwitterAcount.ConsumerSecret;
-
-    //    TwitterAcount.twitterService = new TwitterService(twitterClientInfo);
-
-    //    TwitterAcount.requestToken = TwitterAcount.twitterService.GetRequestToken();
-    //    authUrl = TwitterAcount.twitterService.GetAuthorizationUrl(TwitterAcount.requestToken);
-
-    //    authUrl = Page.ResolveClientUrl(authUrl);
-    //    ButtonGetPin.OnClientClick = "window.open('" + authUrl + "'); return false;";
-    //}
-
     private void CreateAuthUrl()
     {
         requestToken = twitterService.GetRequestToken();
+        Session["TwitterReqToken"] = requestToken;
         authUrl = twitterService.GetAuthorizationUrl(requestToken);
         authUrl = Page.ResolveClientUrl(authUrl);
     }
