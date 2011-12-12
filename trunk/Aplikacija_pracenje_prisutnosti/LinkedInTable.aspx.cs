@@ -8,7 +8,7 @@ using System.Collections.Specialized;
 using Attassa;
 using System.Xml;
 using System.Xml.XPath;
-using Facebook_Developers_Toolkit.Helpers;
+using Facebook_Graph_Toolkit.Helpers;
 
 
 
@@ -138,7 +138,7 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void ImageButtonFacebook_Click(object sender, ImageClickEventArgs e)
     {
-        Response.Redirect(@"~\Default.aspx");
+        IframeHelper.IframeRedirect("", true, true);
     }
     protected void ImageButton5_Click(object sender, ImageClickEventArgs e)
     {

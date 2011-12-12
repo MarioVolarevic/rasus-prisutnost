@@ -9,6 +9,7 @@ using TweetSharp;
 using TweetSharp.Model;
 using TweetSharp.Twitter.Model;
 using TweetSharp.Twitter.Service;
+using Facebook_Graph_Toolkit.Helpers;
 
 public partial class _Default : System.Web.UI.Page 
 {
@@ -48,7 +49,7 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void ImageButtonFacebook_Click(object sender, ImageClickEventArgs e)
     {
-        Page.Response.Redirect(@"~\Default.aspx");
+        IframeHelper.IframeRedirect("", true, true);
     }
     protected void ImageButtonGowalla_Click(object sender, ImageClickEventArgs e)
     {

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using gowalaWarp2;
+using Facebook_Graph_Toolkit.Helpers;
 
 public partial class GowallaLogIn : System.Web.UI.Page
 {
@@ -63,5 +64,9 @@ public partial class GowallaLogIn : System.Web.UI.Page
         //    Response.Redirect(@"~\GowallaTable.aspx");
         //}
 
+    }
+    protected void ImageButtonFacebook_Click(object sender, ImageClickEventArgs e)
+    {
+        IframeHelper.IframeRedirect("", true, true);
     }
 }
