@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Threading;
-using Facebook_Graph_Toolkit;
 using Facebook_Graph_Toolkit.Helpers;
 
 public partial class GPlusTable : System.Web.UI.Page
@@ -16,7 +15,7 @@ public partial class GPlusTable : System.Web.UI.Page
     //private bool prviPut;
     string username;
     string password;
-
+   
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["GUname"] == null || Session["GPass"] == null)
@@ -24,12 +23,15 @@ public partial class GPlusTable : System.Web.UI.Page
             Response.Redirect(@"~\GPlusLogIn.aspx");
         }
         else
-        {
+        {            
             username = Session["GUname"].ToString();
             password = Session["GPass"].ToString();
             gPlusFriends = new GPlusFriends(username, password);
+            gPlusFriends.eventWaitH = ewh;
+            ewh.WaitOne();
+            if(Session["Error"].ToString() == "DA")
+                Response.Redirect(@"~\GPlusLogIn.aspx");
         }
-        gPlusFriends.eventWaitH = ewh;
         
         if (gPlusFriends.GetAllFriends().Count == 0)
             ewh.WaitOne();

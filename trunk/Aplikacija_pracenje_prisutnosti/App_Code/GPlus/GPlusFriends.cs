@@ -5,26 +5,12 @@ using System.Web;
 using agsXMPP;
 using agsXMPP.protocol.client;
 
-public class GFriend
-{
-    public string FullName;
-    public string BareName;
-    public ShowType Availability; //NONE je online, dnd je busy itd.    
-    public string StatusMessage;
-    public PresenceType OnOff;
-
-    public GFriend(string fName, string bareName)
-    {
-        this.FullName = fName;
-        this.BareName = bareName;
-    }
 
 
-}
 /// <summary>
 /// Summary description for GPlusFriends
 /// </summary>
-public class GPlusFriends
+public class GPlusFriends : System.Web.UI.Page
 {
     XmppClientConnection xmppConn;
     List<GFriend> allFriendsList = new List<GFriend>();
@@ -96,14 +82,27 @@ public class GPlusFriends
     }
     private void Login(string UserName, string Password)
     {
+        Session["Error"] = "NE";
+        if (!UserName.Contains("@gmail.com"))
+        {
+            UserName += "@gmail.com";
+        }
         Jid jid = new Jid(UserName);
         xmppConn.Username = jid.User;
-        xmppConn.Server = jid.Server;
+        //xmppConn.Server = jid.Server;
+        xmppConn.Server = "gmail.com";
         xmppConn.Password = Password;
         xmppConn.ConnectServer = "talk.google.com";
         xmppConn.AutoResolveConnectServer = true;
+        xmppConn.OnAuthError += new XmppElementHandler(xmppConn_OnAuthError);
         xmppConn.OnLogin += new ObjectHandler(xmppConn_OnLogin);
         xmppConn.Open();
+    }
+
+    void xmppConn_OnAuthError(object sender, agsXMPP.Xml.Dom.Element e)
+    {
+        Session["Error"] = "DA";
+        eventWaitH.Set();
     }
 
     private ShowType show;
@@ -118,13 +117,15 @@ public class GPlusFriends
 
     void xmppConn_OnLogin(object sender)
     {
+        Session["Error"] = "NE";
+        eventWaitH.Set();
         initUserRcvHandlers();
     }
-    public void ClearActiveFriendsList()
-    {
-        activeFriendsList.Clear();
-        //xmppConn.SendMyPresence();
-    }
+    //public void ClearActiveFriendsList()
+    //{
+    //    activeFriendsList.Clear();
+    //    //xmppConn.SendMyPresence();
+    //}
     //public static GPlusFriends CreateInstance()
     //{
     //    return instance;

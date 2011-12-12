@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Facebook_Graph_Toolkit;
 using Facebook_Graph_Toolkit.Helpers;
 
 public partial class GPlusLogIn : System.Web.UI.Page
@@ -12,6 +11,9 @@ public partial class GPlusLogIn : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["Error"] != null)
+            if (Session["Error"].ToString() == "DA")
+                invalidUP.Text = "Invalid User/Pass";
     }
     protected void ImageButtonTwitter_Click(object sender, ImageClickEventArgs e)
     {
@@ -19,9 +21,6 @@ public partial class GPlusLogIn : System.Web.UI.Page
     }
     protected void ImageButtonGoogle_Click(object sender, ImageClickEventArgs e)
     {
-        //if (GPlusFriends.CreateInstance() != null)
-        //    Page.Response.Redirect(@"~\GPlusTable.aspx");
-        //else
             Page.Response.Redirect(@"~\GPlusLogIn.aspx");
     }
     protected void ImageButtonFacebook_Click(object sender, ImageClickEventArgs e)
@@ -39,7 +38,6 @@ public partial class GPlusLogIn : System.Web.UI.Page
     {
         Session["GUname"] = TextBoxUsername.Text;
         Session["GPass"] = TextBoxPassword.Text;
-        //GPlusFriends.CreateInstance(TextBoxUsername.Text, TextBoxPassword.Text);     
         Response.Redirect(@"~\GPlusTable.aspx");
     }
     protected void ImageButtonLinkedIn_Click(object sender, ImageClickEventArgs e)
