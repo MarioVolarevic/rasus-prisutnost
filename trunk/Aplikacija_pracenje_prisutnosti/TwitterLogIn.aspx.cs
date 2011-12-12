@@ -13,8 +13,8 @@ public partial class _Default : System.Web.UI.Page
 {
     string authUrl;
     TwitterService twitterService = new TwitterService(TwitterAcount.ClientInfo);
-    OAuthToken requestToken;
-    OAuthToken accessToken;
+    static OAuthToken requestToken;
+    OAuthToken accessToken = new OAuthToken();
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -68,7 +68,6 @@ public partial class _Default : System.Web.UI.Page
     {
         requestToken = twitterService.GetRequestToken();
         authUrl = twitterService.GetAuthorizationUrl(requestToken);
-
         authUrl = Page.ResolveClientUrl(authUrl);
     }
 
