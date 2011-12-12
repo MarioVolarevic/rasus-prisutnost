@@ -24,7 +24,8 @@ public partial class _Default : System.Web.UI.Page
     protected void ButtonGetPin_Click(object sender, EventArgs e)
     {
         CreateAuthUrl();
-        Process.Start(authUrl);
+        Page.RegisterStartupScript("PopUP", "<script type='text/javascript'>window.open('"+authUrl+"')</script>");
+        //Process.Start(authUrl);
     }
 
     protected void ButtonAuthorize_Click(object sender, EventArgs e)
