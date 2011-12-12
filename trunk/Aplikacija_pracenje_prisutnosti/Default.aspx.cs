@@ -28,20 +28,12 @@ public partial class _Default : CanvasPage
     }
 
     protected void Page_Load(object sender, EventArgs e)
-    {
-        HttpCookie cookie = new HttpCookie("userID");
-        HttpCookie cookieRet = Request.Cookies["userID"];
-
+    {      
         //JsonObject newObject = new JsonObject();
         //Facebook_Graph_Toolkit.GraphApi.User user = new User(FBUserID);
         //newObject = user.JsonData;
 
-        if (cookieRet == null)
-        {
-            cookie.Value = UserX.counter.ToString();
-            UserX.counter++;
-            Response.Cookies.Add(cookie);
-        }
+      
         //vjekin kod
 
         List<FacebookTable> table = FacebookClient.Connect(Api, FBUserID);
@@ -80,7 +72,7 @@ public partial class _Default : CanvasPage
 
     protected void ImageButtonGowalla_Click(object sender, ImageClickEventArgs e)
     {                
-            Page.Response.Redirect(@"~\GowallaLogIn.aspx");
+            Page.Response.Redirect(@"~\GowallaTable.aspx");
     }
     protected void ImageButtonLinkedIn_Click(object sender, ImageClickEventArgs e)
     {
