@@ -70,7 +70,8 @@ public partial class _Default : System.Web.UI.Page
         double seconds = Convert.ToDouble(timestamp.InnerText)/1000;
         DateTime postDate=new DateTime(1970, 1, 1, 0, 0, 0).AddSeconds(seconds);
         //Button1_Click(null,null);
-        return  postDate.ToLongDateString()+" "+name+" "+surname+" "+statusText.InnerText;
+        return "[" + postDate.ToLongDateString() + "] --> " +name+" "+surname+" " + " says: " + statusText.InnerText + "."; 
+           // postDate.ToLongDateString()+" "+name+" "+surname+" "+statusText.InnerText;
     }
 
     private List<Person> GetAllConections()
@@ -147,7 +148,6 @@ public partial class _Default : System.Web.UI.Page
             num = osobe.Count;
         for (int i = 0; i < num; i++)
         {
-            //ListBox1.Items.Add("[" + tweet.CreatedDate + "] --> " + tweet.User.ScreenName + " says: " + tweet.Text + ".");
             ListBox1.Items.Add(Status(osobe.ElementAt(i).name, osobe.ElementAt(i).surname));
         }
     }
