@@ -19,6 +19,7 @@ namespace gowalaWarp2
     //}
     public class Gowalla
     {
+        const int STUPID_DELAY = 5010;
         static readonly string key = "5035f27dc85a407190c3cb290f71a724";
         string firstName; //user
         string lastName;
@@ -63,14 +64,13 @@ namespace gowalaWarp2
            
           
             #endregion
-            System.Diagnostics.Stopwatch sat = new System.Diagnostics.Stopwatch();
-            sat.Start();
+           
             for(int i = 0;i<alias.Count();i++)
             {                
                 friends.Add(fetchFriendData(authentication.required, alias[i]));
             }
-            long proslo = sat.ElapsedMilliseconds;
             return friends;
+            
         }
         public HttpWebRequest createRequest(string url, authentication aut)
         {
@@ -94,7 +94,7 @@ namespace gowalaWarp2
                 if (stopWatch < 10)
                 {
                     stopWatch++;
-                    Thread.Sleep(1000);
+                    Thread.Sleep(STUPID_DELAY);
                     goto TryLabel;
                 }
             }
@@ -193,7 +193,7 @@ namespace gowalaWarp2
                 if (stopWatch < 10)
                 {
                     stopWatch++;
-                    Thread.Sleep(1000);
+                    Thread.Sleep(STUPID_DELAY);
                     goto TryLabel2;
                 }
             }
@@ -254,7 +254,7 @@ namespace gowalaWarp2
                 if (stopWatch < 10)
                 {
                     stopWatch++;
-                    Thread.Sleep(1000);
+                    Thread.Sleep(STUPID_DELAY);
                     goto TryLabel3;
                 }
                 else

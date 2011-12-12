@@ -27,8 +27,21 @@ public partial class GowallaTable : System.Web.UI.Page
         if (Page.IsPostBack == false)
         {
             Gowalla user = new Gowalla(Session["GowallaUsername"].ToString(), Session["GowallaPassword"].ToString());
-            GridView1.DataSource = user.CatchFriends();
-            GridView1.DataBind();
+            List<Friend> friends = user.CatchFriends();
+            
+            string everything = "";
+            foreach (Friend oneFriend in friends)
+            {
+                everything += oneFriend.firstName + " ";
+                everything += oneFriend.lastName + " ";
+                everything += oneFriend.alias + " ";
+                everything += oneFriend.LastCheckin + " ";                
+                ListBoxGowalla.Items.Add(everything);
+                everything = "";
+            }
+
+           
+
         }
 
     }
