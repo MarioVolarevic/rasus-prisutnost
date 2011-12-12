@@ -18,10 +18,16 @@ public partial class _Default : System.Web.UI.Page
     //private OAuthLinkedIn _oauth = new OAuthLinkedIn();
     protected void Page_Load(object sender, EventArgs e)
     {
-       
+        string previousUrl="";
+        if(Request.UrlReferrer!=null)
+            previousUrl=Request.UrlReferrer.AbsolutePath;
+        if (previousUrl.CompareTo("/Aplikacija_pracenje_prisutnosti/LinkedInTable.aspx")!=0)
+        {
+
+
             string queryParams = HttpContext.Current.Request.Url.Query;
-            string _token=null;
-            string _verifier=null;
+            string _token = null;
+            string _verifier = null;
             if (queryParams.Length > 0)
             {
                 //Store the Token and Token Secret
@@ -38,11 +44,16 @@ public partial class _Default : System.Web.UI.Page
                 OAuthObject._oauth.Verifier = _verifier;
                 String accessToken = OAuthObject._oauth.getAccessToken();
             }
-        
-        ListBox1.Items.Clear();
-        List<Person> osobe=GetAllConections();
-        for(int i=0;i<osobe.Count;i++){
-            ListBox1.Items.Add(Status(osobe.ElementAt(i).name,osobe.ElementAt(i).surname));
+
+            ListBox1.Items.Clear();
+            List<Person> osobe = GetAllConections();
+            int num = 0;
+            if (osobe != null)
+                num = osobe.Count;
+            for (int i = 0; i < num; i++)
+            {
+                ListBox1.Items.Add(Status(osobe.ElementAt(i).name, osobe.ElementAt(i).surname));
+            }
         }
 
     }
@@ -56,10 +67,10 @@ public partial class _Default : System.Web.UI.Page
         //XmlNode root=status.DocumentElement;
         XmlNode timestamp=status.SelectSingleNode("//timestamp");
         XmlNode statusText = status.SelectSingleNode("//comment");
-        double seconds = Convert.ToDouble(timestamp.InnerText);
-        //DateTime postDate=new DateTime(1970, 1, 1, 0, 0, 0).AddSeconds(seconds);
+        double seconds = Convert.ToDouble(timestamp.InnerText)/1000;
+        DateTime postDate=new DateTime(1970, 1, 1, 0, 0, 0).AddSeconds(seconds);
         //Button1_Click(null,null);
-        return  name+" "+surname+" "+statusText.InnerText;
+        return  postDate.ToLongDateString()+" "+name+" "+surname+" "+statusText.InnerText;
     }
 
     private List<Person> GetAllConections()
@@ -107,9 +118,14 @@ public partial class _Default : System.Web.UI.Page
         }
     }
 
+    protected void ImageButtonGowalla_Click(object sender, ImageClickEventArgs e)
+    {
+        Page.Response.Redirect(@"~\GowallaTable.aspx");
+    }
+
     protected void ImageButtonTwitter_Click(object sender, ImageClickEventArgs e)
-    {       
-            Page.Response.Redirect(@"~\TwitterTable.aspx");      
+    {
+        Response.Redirect(@"~\TwitterTable.aspx");
     }
     protected void ImageButtonGoogle_Click(object sender, ImageClickEventArgs e)
     {

@@ -47,19 +47,24 @@
         &nbsp;<span class="style4">Select Social Network: </span>&nbsp;<br />
         &nbsp;&nbsp;
         <asp:ImageButton ID="ImageButton1" runat="server" Height="30px" 
-            ImageUrl="~/Images/FacebookLogo.png" Width="30px" />
+            ImageUrl="~/Images/FacebookLogo.png" Width="30px" 
+            onclick="ImageButtonFacebook_Click" />
 &nbsp;
         <asp:ImageButton ID="ImageButton2" runat="server" Height="30px" 
-            ImageUrl="~/Images/Google+Logo.png" Width="30px"  />
+            ImageUrl="~/Images/GoogleLogo.png" Width="30px" 
+            onclick="ImageButtonGoogle_Click"  />
 &nbsp;
         <asp:ImageButton ID="ImageButton3" runat="server" Height="30px" 
-            ImageUrl="~/Images/TwitterLogoSelected.png" Width="30px" />
+            ImageUrl="~/Images/TwitterLogo.png" Width="30px" 
+            onclick="ImageButtonTwitter_Click" />
 &nbsp;&nbsp;
         <asp:ImageButton ID="ImageButton4" runat="server" Height="30px" 
-            ImageUrl="~/Images/GowallaLogo.png" Width="30px" />
+            ImageUrl="~/Images/GowallaLogo.png" Width="30px" 
+            onclick="ImageButtonGowalla_Click" />
 &nbsp;
         <asp:ImageButton ID="ImageButton5" runat="server" Height="30px" 
-            ImageUrl="~/Images/LinkedInLogopng.png" Width="30px" />
+            ImageUrl="~/Images/LinkedInLogopngSelected.png" Width="30px" 
+            onclick="ImageButton5_Click" />
         <br />
         <hr />
     </div>
@@ -80,7 +85,8 @@
          <asp:TextBox ID="TextBox1" runat="server" Width="616px"></asp:TextBox>
          <br />
          <br />
-         <asp:Button ID="Button1" runat="server" onclick="Button1_Click" Text="Button" />
+         <asp:Button ID="Button1" runat="server" onclick="Button1_Click" 
+             Text="Update status" />
 
     </div>
     </form>
