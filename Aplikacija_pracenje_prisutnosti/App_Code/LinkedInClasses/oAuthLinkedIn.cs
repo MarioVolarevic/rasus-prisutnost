@@ -24,7 +24,7 @@ namespace Attassa
         public const string AUTHORIZE = "https://api.linkedin.com/uas/oauth/authenticate";
         public const string ACCESS_TOKEN = "https://api.linkedin.com/uas/oauth/accessToken";
         /*Should replace the following URL callback to your own domain*/
-        public const string CALLBACK = "http://localhost:49826/Aplikacija_pracenje_prisutnosti/LinkedInTable.aspx";
+        public const string CALLBACK = "http://raspris.rjovic.com/LinkedInTable.aspx";
 
         private string _token = "";
         private string _tokenSecret = "";
