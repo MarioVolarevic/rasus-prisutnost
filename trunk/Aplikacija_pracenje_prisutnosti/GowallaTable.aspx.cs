@@ -18,7 +18,7 @@ public partial class GowallaTable : System.Web.UI.Page
         }
         else
         {
-            string id = Session["username"].ToString() + Session["password"].ToString();
+            string id = Session["GowallaUsername"].ToString() + Session["GowallaPassword"].ToString();
             GridView1.DataSource = UserX.listOfAllUser[id].friends;
             GridView1.DataBind();
         }
