@@ -12,15 +12,14 @@ using FacebookLibrary;
 
 public partial class _Default : CanvasPage 
 {
-    protected void Page_PreInit(object sender, EventArgs e) 
+    protected void Page_PreInit(object sender, EventArgs e)
     {
-        if (Session["FBLogInReq"] == null)
-        {
-            RequireLogin = true;
-            Session["FBLogInReq"] = "OK";
-            ExtendedPermissions = "friends_online_presence";
-            CheckExtendedPermissions = true;
-        }
+
+        RequireLogin = true;
+        Session["FBLogInReq"] = "OK";
+        ExtendedPermissions = "friends_online_presence";
+        CheckExtendedPermissions = true;
+
     }
     
     protected void Page_Load(object sender, EventArgs e)
@@ -35,9 +34,11 @@ public partial class _Default : CanvasPage
             Response.Cookies.Add(cookie);
         }
         //vjekin kod
-        GridView1.DataSource = FacebookClient.Connect(Api, FBUserID);
-        GridView1.DataBind();
-        
+        if (!IsPostBack)
+        {
+            GridView1.DataSource = FacebookClient.Connect(Api, FBUserID);
+            GridView1.DataBind();
+        }
     }
 
     protected void ImageButtonFacebook_Click(object sender, ImageClickEventArgs e) 
