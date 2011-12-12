@@ -91,7 +91,7 @@ namespace gowalaWarp2
             }
             catch (WebException e)
             {
-                if (stopWatch < 5)
+                if (stopWatch < 10)
                 {
                     stopWatch++;
                     Thread.Sleep(1000);
@@ -190,7 +190,7 @@ namespace gowalaWarp2
             }
             catch(WebException  e)
             {
-                if (stopWatch < 5)
+                if (stopWatch < 10)
                 {
                     stopWatch++;
                     Thread.Sleep(1000);
@@ -251,7 +251,7 @@ namespace gowalaWarp2
             }
             catch (System.Net.WebException e)
             {                
-                if (stopWatch < 5)
+                if (stopWatch < 10)
                 {
                     stopWatch++;
                     Thread.Sleep(1000);
