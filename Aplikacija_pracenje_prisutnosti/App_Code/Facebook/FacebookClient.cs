@@ -35,26 +35,30 @@ namespace FacebookLibrary
 
         static List<string> ParseUserFriends(JsonArray result)
         {
-            string[] splitResult = result.ToString().Split(',');
             List<string> userFriends = new List<string>();
-            for (int i = 0; i < splitResult.Count(); i++) 
+            if (result.ToString().Contains("name"))
             {
-                if (i == 0) 
+                string[] splitResult = result.ToString().Split(',');
+                
+                for (int i = 0; i < splitResult.Count(); i++)
                 {
-                    splitResult[i] = splitResult[i].Remove(0, 10);
-                    splitResult[i] = splitResult[i].Remove(splitResult[i].Length - 2, 2);
+                    if (i == 0)
+                    {
+                        splitResult[i] = splitResult[i].Remove(0, 10);
+                        splitResult[i] = splitResult[i].Remove(splitResult[i].Length - 2, 2);
+                    }
+                    else if (i == splitResult.Count() - 1)
+                    {
+                        splitResult[i] = splitResult[i].Remove(0, 9);
+                        splitResult[i] = splitResult[i].Remove(splitResult[i].Length - 3, 3);
+                    }
+                    else
+                    {
+                        splitResult[i] = splitResult[i].Remove(0, 9);
+                        splitResult[i] = splitResult[i].Remove(splitResult[i].Length - 2, 2);
+                    }
+                    userFriends.Add(splitResult[i]);
                 }
-                else if (i == splitResult.Count() - 1)
-                {
-                    splitResult[i] = splitResult[i].Remove(0, 9);
-                    splitResult[i] = splitResult[i].Remove(splitResult[i].Length - 3, 3);
-                }
-                else 
-                {
-                    splitResult[i] = splitResult[i].Remove(0, 9);
-                    splitResult[i] = splitResult[i].Remove(splitResult[i].Length - 2, 2);
-                }
-                userFriends.Add(splitResult[i]);
             }
             return userFriends;
         }
