@@ -17,10 +17,13 @@ public partial class _Default : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        // prvo provjeravamo postoji li pristupni token u sesijskoj varijabli
+        // ukoliko ne postoji preusmjeravamo korisnika na logIn stranicu
         if (Session["TwitterAccessToken"] == null)
         {
             Response.Redirect(@"~\TwitterLogIn.aspx");
         }
+        // inače autoriziramo aplikaciju
         else
         {
             OAuthToken accessToken = (OAuthToken)Session["TwitterAccessToken"];
@@ -32,11 +35,13 @@ public partial class _Default : System.Web.UI.Page
 
     protected void ButtonPostNewTweet_Click(object sender, EventArgs e)
     {
+        // postavljanje novog tweeta
         twitterService.SendTweet(TextBoxNewTweet.Text);
     }
 
     protected void refreshFriendTweets()
     {
+        // dohvaćanje tweetova prijatelja i sortiranje po vremenu stvaranja
         IEnumerable<TwitterStatus> tweets = twitterService.ListTweetsOnFriendsTimeline();
         foreach (TwitterStatus tweet in tweets)
         {

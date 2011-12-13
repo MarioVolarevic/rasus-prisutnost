@@ -23,16 +23,20 @@ public partial class _Default : System.Web.UI.Page
 
     protected void ButtonGetPin_Click(object sender, EventArgs e)
     {
+        // pritiskom gumba za dohvaćanje pina pokrećemo stvarnje URL adrese za dohvat pina
         CreateAuthUrl();
+        // URL adresu stvaramo u novom skočnom prozoru
         Page.RegisterStartupScript("PopUP", "<script type='text/javascript'>window.open('"+authUrl+"')</script>");
         //Process.Start(authUrl);
     }
 
     protected void ButtonAuthorize_Click(object sender, EventArgs e)
     {
+        // pritiskom gumba za autorizaciju aplikacije stvaramo pristupni token pomoću unesenog pina i request tokena
         OAuthToken accessToken;
         accessToken = twitterService.GetAccessToken((OAuthToken) Session["TwitterRequestToken"], this.TextBoxPin.Text);
 
+        // pristupni token spremamo u sesijsku varijablu
         Session["TwitterAccessToken"] = accessToken;
               
         Page.Response.Redirect(@"~\TwitterTable.aspx");
@@ -40,6 +44,7 @@ public partial class _Default : System.Web.UI.Page
 
     private void CreateAuthUrl()
     {
+        // dohvaćanje URL adrese za pristup pinu
         requestToken = twitterService.GetRequestToken();
         Session["TwitterRequestToken"] = requestToken;
         authUrl = twitterService.GetAuthorizationUrl(requestToken);
