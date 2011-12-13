@@ -18,7 +18,7 @@ public partial class _Default : System.Web.UI.Page
             Page.Response.Redirect(OAuthObject._oauth.AuthorizationLink);
         }
         else
-            Page.Response.Redirect("http://apps.facebook.com/online_presence_app/LinkedInTable.aspx");
+            Page.Response.Redirect("http://raspris.rjovic.com/LinkedInTable.aspx");
     }
     
     protected void LogInButtonClick(object sender, EventArgs e)
