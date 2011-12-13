@@ -8,7 +8,6 @@ namespace FacebookLibrary
     public class FacebookTable
     {
         string name;
-        string lastname;
         string fbStatus;
 
         public FacebookTable(string result) 
@@ -19,7 +18,6 @@ namespace FacebookLibrary
         public FacebookTable(string name, string response) 
         {
             this.name = name;
-            //this.lastname = lastname;
             this.fbStatus = response;
         }
 
@@ -28,12 +26,6 @@ namespace FacebookLibrary
             get { return name; }
             set { name = value; }
         }
-
-        //public string LastName
-        //{
-        //    get { return lastname; }
-        //    set { lastname = value; }
-        //}
 
         public string FBStatus
         {

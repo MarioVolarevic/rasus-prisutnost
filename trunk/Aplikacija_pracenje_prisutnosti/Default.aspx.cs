@@ -20,21 +20,8 @@ public partial class _Default : CanvasPage
         CheckExtendedPermissions = true;              
     }
 
-    protected void OnLoad(object sender, EventArgs e)
-    {
-
-       
-
-    }
-
     protected void Page_Load(object sender, EventArgs e)
-    {      
-        //JsonObject newObject = new JsonObject();
-        //Facebook_Graph_Toolkit.GraphApi.User user = new User(FBUserID);
-        //newObject = user.JsonData;
-
-      
-        //vjekin kod
+    {       
         List<FacebookTable> table = new List<FacebookTable>();
         table = FacebookClient.Connect(Api, FBUserID);
         ListBoxFB.Items.Clear();
@@ -42,9 +29,6 @@ public partial class _Default : CanvasPage
         {
             ListBoxFB.Items.Add(item.Name + " " + item.FBStatus);
         }
-        //GridView1.DataSource = FacebookClient.Connect(Api, FBUserID);
-        //GridView1.DataBind();
-
     }
 
     protected void ImageButtonFacebook_Click(object sender, ImageClickEventArgs e) 
@@ -55,9 +39,7 @@ public partial class _Default : CanvasPage
         foreach (FacebookTable item in table)
         {
             ListBoxFB.Items.Add(item.Name + " " + item.FBStatus);
-        }
-        //GridView1.DataSource = FacebookClient.Connect(Api, FBUserID);
-        //GridView1.DataBind();    
+        } 
     }
 
     protected void ImageButtonTwitter_Click(object sender, ImageClickEventArgs e)
