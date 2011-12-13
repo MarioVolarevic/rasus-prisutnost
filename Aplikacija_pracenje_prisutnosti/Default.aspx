@@ -73,7 +73,7 @@
          &nbsp;&nbsp;&nbsp;
          <br />
         <asp:ListBox ID="ListBoxFB" runat="server" Height="269px" Width="622px" 
-             style="font-family: Calibri; text-align: center;" >
+             style="font-family: Calibri; text-align: left;" >
          </asp:ListBox>
     </div>
     </form>
