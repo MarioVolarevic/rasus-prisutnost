@@ -16,13 +16,21 @@ namespace FacebookLibrary
         {
             string query = "SELECT name FROM user WHERE online_presence IN ('active', 'idle') AND uid IN (SELECT uid2 FROM friend WHERE uid1 =" + userID + ")";
             JsonArray result = Api.Fql(query);
-            List<string> friendsName = ParseUserFriends(result);
-            List<FacebookTable> onlineFriends = new List<FacebookTable>();
-            foreach (string name in friendsName)
+            try
             {
-                onlineFriends.Add(new FacebookTable(name, " is online"));
+                List<string> friendsName = ParseUserFriends(result);
+                List<FacebookTable> onlineFriends = new List<FacebookTable>();
+                foreach (string name in friendsName)
+                {
+                    onlineFriends.Add(new FacebookTable(name, " is online"));
+                }
+                return onlineFriends;
             }
-            return onlineFriends;
+            catch 
+            {
+                return new List<FacebookTable>();    
+            }
+            
         }
 
         static List<string> ParseUserFriends(JsonArray result)
