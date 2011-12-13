@@ -26,6 +26,8 @@ namespace FacebookLibrary
             {
                 try
                 {
+                    // Ucitavanje prijatelja
+                    //http://stackoverflow.com/questions/1795934/how-to-get-list-of-online-friends-using-fql-with-facebook-api
                     //Facebook_Graph_Toolkit.GraphApi.User user = new Facebook_Graph_Toolkit.GraphApi.User(friend.ID, Api.AccessToken);
                     string query = "SELECT online_presence FROM user WHERE uid== " + friend.ID;
                     JsonArray result = Api.Fql(query);
