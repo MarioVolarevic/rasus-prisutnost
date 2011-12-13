@@ -14,8 +14,6 @@ namespace FacebookLibrary
 
         public static List<FacebookTable> Connect(Api Api, string userID)
         {
-            IList<NameIDPair> userFriends = new List<NameIDPair>();
-            //userFriends = Facebook_Graph_Toolkit.GraphApi.User.GetFriends(userID, Api.AccessToken);
             string query = "SELECT name FROM user WHERE online_presence IN ('active', 'idle') AND uid IN (SELECT uid2 FROM friend WHERE uid1 =" + userID + ")";
             JsonArray result = Api.Fql(query);
             List<string> friendsName = ParseUserFriends(result);
@@ -24,33 +22,7 @@ namespace FacebookLibrary
             {
                 onlineFriends.Add(new FacebookTable(name, " is online"));
             }
-            
-            //List<string> userFriends = new List<string>();
-            //userFriends = ParseUserFriends(friendsResult);
-           
-            //foreach (NameIDPair friend in userFriends)
-            //{
-            //    try
-            //    {
-            //        //Ucitavanje prijatelja
-            //        //http://stackoverflow.com/questions/1795934/how-to-get-list-of-online-friends-using-fql-with-facebook-api
-            //        Facebook_Graph_Toolkit.GraphApi.User user = new Facebook_Graph_Toolkit.GraphApi.User(friend.ID, Api.AccessToken);
-            //        string query = "SELECT online_presence FROM user WHERE uid== " + friend.ID;
-            //        if (result.ToString().Contains("active") || result.ToString().Contains("idle"))
-            //        {
-            //            onlineFriends.Add(new FacebookTable(friend.Name, "active"));
-            //        }
-            //    }
-            //    catch
-            //    {
-            //        //Label1.Text = friend.ID + "," + Api.AccessToken;
-            //        return onlineFriends;
-            //    }
-                
-            //}
-
             return onlineFriends;
-                     
         }
 
         static List<string> ParseUserFriends(JsonArray result)
