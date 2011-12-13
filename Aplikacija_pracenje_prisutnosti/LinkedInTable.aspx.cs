@@ -52,6 +52,7 @@ public partial class _Default : System.Web.UI.Page
             int num = 0;
             if (osobe != null)
                 num = osobe.Count;
+            ListBox1.Items.Add(MyStatus());
             for (int i = 0; i < num; i++)
             {
                 ListBox1.Items.Add(Status(osobe.ElementAt(i).name, osobe.ElementAt(i).surname));
@@ -59,6 +60,20 @@ public partial class _Default : System.Web.UI.Page
         }
 
     }
+
+    private string MyStatus()
+    {
+        XmlDocument status = new XmlDocument();
+        status.LoadXml(OAuthObject._oauth.APIWebRequest("GET", "http://api.linkedin.com/v1/people/~:(current-share)" , null));
+        //XmlNode root=status.DocumentElement;
+        XmlNode timestamp = status.SelectSingleNode("//timestamp");
+        XmlNode statusText = status.SelectSingleNode("//comment");
+        double seconds = Convert.ToDouble(timestamp.InnerText) / 1000;
+        DateTime postDate = new DateTime(1970, 1, 1, 0, 0, 0).AddSeconds(seconds);
+        //Button1_Click(null,null);
+        return "["+ postDate.ToLongDateString()+" "+ postDate.ToLongTimeString() + "] --> " +"Me" + " " + " says: " + statusText.InnerText + "."; 
+    }
+
 
     private string Status(string name, string surname)
     {
@@ -72,7 +87,7 @@ public partial class _Default : System.Web.UI.Page
         double seconds = Convert.ToDouble(timestamp.InnerText)/1000;
         DateTime postDate=new DateTime(1970, 1, 1, 0, 0, 0).AddSeconds(seconds);
         //Button1_Click(null,null);
-        return "[" + postDate.ToLongDateString() + "] --> " +name+" "+surname+" " + " says: " + statusText.InnerText + "."; 
+        return "[" +postDate.ToLongDateString()+" "+ postDate.ToLongTimeString() + "] --> " +name+" "+surname+" " + " says: " + statusText.InnerText + "."; 
            // postDate.ToLongDateString()+" "+name+" "+surname+" "+statusText.InnerText;
     }
 
@@ -109,11 +124,11 @@ public partial class _Default : System.Web.UI.Page
         {
             
             string xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-            xml += "<current-status>" + "josip" + "</current-status>";
+            xml += "<current-status>" + TextBox1.Text + "</current-status>";
 
             string response = OAuthObject._oauth.APIWebRequest("PUT", "http://api.linkedin.com/v1/people/~/current-status", xml);
             if (response == "")
-                TextBox1.Text += "\nYour new status updated.  view linkedin for status.";
+                TextBox1.Text = "";
         }
         catch (Exception exp)
         {
@@ -148,6 +163,7 @@ public partial class _Default : System.Web.UI.Page
         int num = 0;
         if (osobe != null)
             num = osobe.Count;
+        ListBox1.Items.Add(MyStatus());
         for (int i = 0; i < num; i++)
         {
             ListBox1.Items.Add(Status(osobe.ElementAt(i).name, osobe.ElementAt(i).surname));
