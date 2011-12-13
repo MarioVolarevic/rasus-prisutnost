@@ -42,20 +42,28 @@ namespace FacebookLibrary
                 
                 for (int i = 0; i < splitResult.Count(); i++)
                 {
-                    if (i == 0)
+                    if (i == 0 && i == splitResult.Count() - 1)
                     {
                         splitResult[i] = splitResult[i].Remove(0, 10);
-                        splitResult[i] = splitResult[i].Remove(splitResult[i].Length - 2, 2);
-                    }
-                    else if (i == splitResult.Count() - 1)
-                    {
-                        splitResult[i] = splitResult[i].Remove(0, 9);
                         splitResult[i] = splitResult[i].Remove(splitResult[i].Length - 3, 3);
                     }
                     else
                     {
-                        splitResult[i] = splitResult[i].Remove(0, 9);
-                        splitResult[i] = splitResult[i].Remove(splitResult[i].Length - 2, 2);
+                        if (i == 0)
+                        {
+                            splitResult[i] = splitResult[i].Remove(0, 10);
+                            splitResult[i] = splitResult[i].Remove(splitResult[i].Length - 2, 2);
+                        }
+                        else if (i == splitResult.Count() - 1)
+                        {
+                            splitResult[i] = splitResult[i].Remove(0, 9);
+                            splitResult[i] = splitResult[i].Remove(splitResult[i].Length - 3, 3);
+                        }
+                        else
+                        {
+                            splitResult[i] = splitResult[i].Remove(0, 9);
+                            splitResult[i] = splitResult[i].Remove(splitResult[i].Length - 2, 2);
+                        }
                     }
                     userFriends.Add(splitResult[i]);
                 }
