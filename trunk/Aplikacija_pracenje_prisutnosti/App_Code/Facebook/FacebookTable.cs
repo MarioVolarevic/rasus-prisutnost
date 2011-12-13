@@ -20,24 +20,7 @@ namespace FacebookLibrary
         {
             this.name = name;
             //this.lastname = lastname;
-            this.fbStatus = fbStatus;
-            if (response.Contains("offline")) 
-            {
-                fbStatus = "offline";    
-            }
-            if (response.Contains("active")) 
-            {
-                fbStatus = "active";
-            }
-            if (response.Contains("idle")) 
-            {
-                fbStatus = "idle";
-            }
-            if (response.Contains("null")) 
-            {
-                fbStatus = "unknown";
-            }
- 
+            this.fbStatus = response;
         }
 
         public string Name 
