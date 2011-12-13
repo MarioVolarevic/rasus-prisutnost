@@ -68,9 +68,14 @@
         <br />
         <hr />
     </div>
-     <asp:ListBox ID="ListBoxFB" runat="server" Height="269px" Width="622px" 
-             style="font-family: Calibri">
+      <div class="style2" 
+         style="height: 457px; color: #789CEF; width: 760px; background-color: #EFEFEF; font-weight: 700; font-size: medium; font-family: Calibri; text-align: center;">
+         &nbsp;&nbsp;&nbsp;
+         <br />
+        <asp:ListBox ID="ListBoxFB" runat="server" Height="269px" Width="622px" 
+             style="font-family: Calibri; text-align: center;" >
          </asp:ListBox>
+    </div>
     </form>
 </body>
 </html>
