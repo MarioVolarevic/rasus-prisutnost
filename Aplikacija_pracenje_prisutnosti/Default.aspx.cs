@@ -35,8 +35,9 @@ public partial class _Default : CanvasPage
 
       
         //vjekin kod
-
-        List<FacebookTable> table = FacebookClient.Connect(Api, FBUserID);
+        List<FacebookTable> table = new List<FacebookTable>();
+        table = FacebookClient.Connect(Api, FBUserID);
+        ListBoxFB.Items.Clear();
         foreach (FacebookTable item in table) 
         {
             ListBoxFB.Items.Add(item.Name + " " + item.FBStatus);
@@ -48,7 +49,9 @@ public partial class _Default : CanvasPage
 
     protected void ImageButtonFacebook_Click(object sender, ImageClickEventArgs e) 
     {
-        List<FacebookTable> table = FacebookClient.Connect(Api, FBUserID);
+        List<FacebookTable> table = new List<FacebookTable>();
+        table = FacebookClient.Connect(Api, FBUserID);
+        ListBoxFB.Items.Clear();
         foreach (FacebookTable item in table)
         {
             ListBoxFB.Items.Add(item.Name + " " + item.FBStatus);
