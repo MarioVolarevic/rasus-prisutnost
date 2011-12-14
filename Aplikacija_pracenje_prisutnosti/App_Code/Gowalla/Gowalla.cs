@@ -12,11 +12,7 @@ namespace gowalaWarp2
     {
         required,notRequired
     };
-    //public struct ThreadParams
-    //{
-    //    authentication aut;
-    //    string alias;
-    //}
+   
     public class Gowalla
     {
         const int STUPID_DELAY = 1001;
@@ -29,22 +25,20 @@ namespace gowalaWarp2
         string passWord;       
         string alias;
         public List<Friend> friends = new List<Friend>();
-      // List<Thread> catchFriData = new List<Thread>();
-
+      
+        
+        //Stvaranje objekta za novog korisnika i prijavljivanje na Gowallu
         public Gowalla(string userName, string passWord)
         {
             this.userName = userName;
             this.passWord = passWord;
-
-        
-
-            
-            string result = fetchBasicUserData(authentication.required);
-           // friends = catchFriends();
-           
+                    
+            string result = fetchBasicUserData(authentication.required);         
         }
         
-        //public List<Friend> catchFriends()
+        //Metoda dohvaća popis svih prijatelja te 
+        //poziva metodu fetchFriendData nad svakim prijateljem
+        //kako bi dohvatila njihove podatke
         public List<Friend> CatchFriends()
         {
             #region Load HTML with informations and filter users
@@ -72,6 +66,10 @@ namespace gowalaWarp2
             return friends;
             
         }
+
+        //Metoda koja kreira HTTP zahtjev 
+        //prima URL traženog resursa te enumerator  koji
+        //odredjuje da li je potrebna ovjera
         public HttpWebRequest createRequest(string url, authentication aut)
         {
            
@@ -96,6 +94,8 @@ namespace gowalaWarp2
             return null;
         }
 
+        //Metoda dohvaća za određenog prijatelja ime
+        //prezime, alias te vrijeme zadnjeg Checkina
         private Friend fetchFriendData(authentication aut, string alias)
         {
             Friend newFriend = new Friend(null, null);
@@ -157,6 +157,7 @@ namespace gowalaWarp2
             
         }
 
+        //Metoda koja preko URL-a dohvaća zadnji Checkin
         private DateTime lastCheckin(string url, authentication aut)
         {
             HttpWebRequest request = createRequest("http://api.gowalla.com" + url, aut);
@@ -213,7 +214,8 @@ namespace gowalaWarp2
         
 
 
-        
+        //Dohvaćanje osnovnih korisničkih podataka
+        //kao što su ime, prezime, alias (korisničko ime)...
         private string fetchBasicUserData(authentication aut)
         {
             HttpWebRequest request = createRequest("http://api.gowalla.com/users/me", aut);
@@ -267,6 +269,8 @@ namespace gowalaWarp2
             }
         }
 
+        //Metoda koja preko URL dohvaća resurs (točnije sliku)
+        //Avatari se u ovom programu ne koriste.
         private Stream getResource(string url)
         {
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);

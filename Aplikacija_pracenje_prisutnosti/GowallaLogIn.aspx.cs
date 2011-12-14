@@ -9,17 +9,9 @@ using Facebook_Graph_Toolkit.Helpers;
 
 public partial class GowallaLogIn : System.Web.UI.Page
 {
-   // private string userId;
+ 
     protected void Page_Load(object sender, EventArgs e)
-    {
-        //HttpCookie cookie = Request.Cookies["userID"];
-
-        //this.userId = cookie.Value;
-        //if (UserX.listOfAllUser.ContainsKey(userId))
-        //{
-        //    Page.Response.Redirect(@"~\GowallaTable.aspx");
-        //}   
-      
+    {              
 
     }
 
@@ -35,12 +27,14 @@ public partial class GowallaLogIn : System.Web.UI.Page
     {       
         Page.Response.Redirect(@"~\LinkedInLogIn.aspx");     
     }
+
+    //Nakon upisa korisničkog imena i lozinke i pritiska na gumb Log in
+    //pokreće se ova metoda.
+    //Ukoliko su podaci točni stvara se nova sjednica sa upisanim podacima te
+    //se korisnik preusmjerava na stranicu ~\GowallaTable.aspx
     protected void ButtonLogIn_Click(object sender, EventArgs e)
     {
         string user = TextBoxUsername.Text + TextBoxPassword.Text;
-
-        //if (!(UserX.listOfAllUser.ContainsKey(user)))
-        //{
 
         Gowalla newUser = new Gowalla(TextBoxUsername.Text, TextBoxPassword.Text);
         if (newUser.Status == false)
@@ -49,21 +43,11 @@ public partial class GowallaLogIn : System.Web.UI.Page
         }
         else
         {
-            // UserX.listOfAllUser.Add(TextBoxUsername.Text + TextBoxPassword.Text, newUser);
+          
             Session["GowallaUsername"] = TextBoxUsername.Text;
             Session["GowallaPassword"] = TextBoxPassword.Text;
             Response.Redirect(@"~\GowallaTable.aspx");
-        }
-
-        //}
-        //else
-        //{
-
-        //    Session["GowallaUsername"] = TextBoxUsername.Text;
-        //    Session["GowallaPassword"] = TextBoxPassword.Text;
-        //    Response.Redirect(@"~\GowallaTable.aspx");
-        //}
-
+        }              
     }
     protected void ImageButtonFacebook_Click(object sender, ImageClickEventArgs e)
     {

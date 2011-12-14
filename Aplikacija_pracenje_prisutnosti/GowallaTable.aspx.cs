@@ -13,7 +13,8 @@ public partial class GowallaTable : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
            
-
+        //Ukoliko za korisnika nije stvorena sjednica, odnosno on nije prijavljen
+        //preusmjerava ga se na ~\GowallaLogIn.aspx
         if (Session["GowallaUsername"] == null || Session["GowallaPassword"] == null)
         {                                      
                 Response.Redirect(@"~\GowallaLogIn.aspx");           
@@ -26,6 +27,8 @@ public partial class GowallaTable : System.Web.UI.Page
          * riječ o 20-tak ušparanih sekundi. :) */
         if (Page.IsPostBack == false)
         {
+            //ukoliko je već stvorena sjednica, imamo korisnikove podatke te se prijavljujemo
+            //na Gowallin poslužitelj i dohvaćamo podatke
             Gowalla user = new Gowalla(Session["GowallaUsername"].ToString(), Session["GowallaPassword"].ToString());
             List<Friend> friends = user.CatchFriends();
             
