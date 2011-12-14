@@ -19,7 +19,6 @@ public partial class _Default : System.Web.UI.Page
     //private OAuthLinkedIn _oauth = new OAuthLinkedIn();
     protected void Page_Load(object sender, EventArgs e)
     {
-        
         string previousUrl="";
         if(Request.UrlReferrer!=null)
             previousUrl=Request.UrlReferrer.AbsolutePath;
@@ -59,7 +58,6 @@ public partial class _Default : System.Web.UI.Page
                 ListBox1.Items.Add(Status(osobe.ElementAt(i).name, osobe.ElementAt(i).surname));
             }
         }
-        IframeHelper.IframeRedirect("LinkedInTable.aspx", true, true);
 
     }
 
