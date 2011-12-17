@@ -263,9 +263,9 @@ namespace Attassa
                 parameters.Add(new QueryParameter(OAuthTokenKey, token));
             }
 
-            if (!string.IsNullOrEmpty(oauth_verifier))
+            if (!string.IsNullOrEmpty((String)HttpContext.Current.Session["OAuthVerifier"]))
             {
-                parameters.Add(new QueryParameter(oAauthVerifier, oauth_verifier));
+                parameters.Add(new QueryParameter(oAauthVerifier, (String)HttpContext.Current.Session["OAuthVerifier"]));
             }
 
 

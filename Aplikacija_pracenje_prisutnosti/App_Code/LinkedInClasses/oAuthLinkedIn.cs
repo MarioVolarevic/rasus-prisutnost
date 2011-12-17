@@ -43,6 +43,8 @@ namespace Attassa
         /// </summary>
         /// <returns>The request token.</returns>
         public String getRequestToken() {
+            HttpContext.Current.Session["OAuthToken"] = "";
+            HttpContext.Current.Session["OAuthTokenSecret"] = "";
             string ret = null;
             string response = oAuthWebRequest(Method.POST, REQUEST_TOKEN, String.Empty);
             if (response.Length > 0)
@@ -51,7 +53,9 @@ namespace Attassa
                 if (qs["oauth_token"] != null)
                 {
                     this.Token = qs["oauth_token"];
+                    HttpContext.Current.Session["OAuthToken"] = this.Token;
                     this.TokenSecret = qs["oauth_token_secret"];
+                    HttpContext.Current.Session["OAuthTokenSecret"] = this.TokenSecret;
                     ret = this.Token;
                 }
             }
@@ -91,7 +95,6 @@ namespace Attassa
                 Exception e = new Exception("The request token and verifier were not set");
                 throw e;
             }
-
             string response = oAuthWebRequest(Method.POST, ACCESS_TOKEN, string.Empty);
 
             if (response.Length > 0)
@@ -100,10 +103,12 @@ namespace Attassa
                 if (qs["oauth_token"] != null)
                 {
                     this.Token = qs["oauth_token"];
+                    HttpContext.Current.Session["OAuthToken"]=this.Token;
                 }
                 if (qs["oauth_token_secret"] != null)
                 {
                     this.TokenSecret = qs["oauth_token_secret"];
+                    HttpContext.Current.Session["OAuthTokenSecret"] = this.TokenSecret;
                 }
             }
 
@@ -177,8 +182,8 @@ namespace Attassa
             string sig = this.GenerateSignature(uri,
                 this.ConsumerKey,
                 this.ConsumerSecret,
-                this.Token,
-                this.TokenSecret,
+                (String)HttpContext.Current.Session["OAuthToken"],
+                (String)HttpContext.Current.Session["OAuthTokenSecret"],
                 method.ToString(),
                 timeStamp,
                 nonce,
@@ -226,8 +231,8 @@ namespace Attassa
             string sig = this.GenerateSignature(uri,
                 this.ConsumerKey,
                 this.ConsumerSecret,
-                this.Token,
-                this.TokenSecret,
+                (String)HttpContext.Current.Session["OAuthToken"],
+                (String)HttpContext.Current.Session["OAuthTokenSecret"],
                 method,
                 timeStamp,
                 nonce,
@@ -246,7 +251,7 @@ namespace Attassa
             webRequest.ServicePoint.Expect100Continue = false;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
 
-            webRequest.Headers.Add("Authorization", "OAuth realm=\"http://api.linkedin.com/\",oauth_consumer_key=\"" + this.ConsumerKey + "\",oauth_token=\"" + this.Token + "\",oauth_signature_method=\"HMAC-SHA1\",oauth_signature=\"" + HttpUtility.UrlEncode(sig) + "\",oauth_timestamp=\"" + timeStamp + "\",oauth_nonce=\"" + nonce + "\",oauth_verifier=\"" + this.Verifier + "\", oauth_version=\"1.0\"");            
+            webRequest.Headers.Add("Authorization", "OAuth realm=\"http://api.linkedin.com/\",oauth_consumer_key=\"" + this.ConsumerKey + "\",oauth_token=\"" + (String)HttpContext.Current.Session["OAuthToken"] + "\",oauth_signature_method=\"HMAC-SHA1\",oauth_signature=\"" + HttpUtility.UrlEncode(sig) + "\",oauth_timestamp=\"" + timeStamp + "\",oauth_nonce=\"" + nonce + "\",oauth_verifier=\"" + (String)HttpContext.Current.Session["OAuthVerifier"] + "\", oauth_version=\"1.0\"");            
 
             if (postData != null)
             {
