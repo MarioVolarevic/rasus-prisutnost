@@ -37,14 +37,20 @@ public partial class _Default : System.Web.UI.Page
                 if (qs["oauth_token"] != null)
                 {
                     _token = qs["oauth_token"];
+                    Session["LinkedInOAuthToken"] = _token;
                 }
                 if (qs["oauth_verifier"] != null)
                 {
                     _verifier = qs["oauth_verifier"];
+                    Session["OAuthVerifier"] = _verifier;
                 }
                 OAuthObject._oauth.Token = _token;
                 OAuthObject._oauth.Verifier = _verifier;
                 String accessToken = OAuthObject._oauth.getAccessToken();
+                Session["LinkedInOAuthToken"] = OAuthObject._oauth.Token;
+                Session["LinkedInOAuthVerifier"] = OAuthObject._oauth.Verifier;
+
+                
             }
 
             ListBox1.Items.Clear();
@@ -52,12 +58,16 @@ public partial class _Default : System.Web.UI.Page
             int num = 0;
             if (osobe != null)
                 num = osobe.Count;
-            ListBox1.Items.Add(MyStatus());
+            string myStatus = MyStatus();
+            if (myStatus != "")
+                ListBox1.Items.Add(myStatus);
             for (int i = 0; i < num; i++)
             {
                 ListBox1.Items.Add(Status(osobe.ElementAt(i).name, osobe.ElementAt(i).surname));
             }
+            
         }
+       
 
     }
 
@@ -68,10 +78,18 @@ public partial class _Default : System.Web.UI.Page
         //XmlNode root=status.DocumentElement;
         XmlNode timestamp = status.SelectSingleNode("//timestamp");
         XmlNode statusText = status.SelectSingleNode("//comment");
-        double seconds = Convert.ToDouble(timestamp.InnerText) / 1000;
-        DateTime postDate = new DateTime(1970, 1, 1, 0, 0, 0).AddSeconds(seconds);
+        double seconds;
+        DateTime postDate=new DateTime(1970, 1, 1, 0, 0, 0);
+        if (timestamp != null)
+        {
+            seconds = Convert.ToDouble(timestamp.InnerText) / 1000;
+            postDate = postDate.AddSeconds(seconds);
+        }
         //Button1_Click(null,null);
-        return "["+ postDate.ToLongDateString()+" "+ postDate.ToLongTimeString() + "] --> " +"Me" + " " + " says: " + statusText.InnerText + "."; 
+        if (postDate != new DateTime(1970, 1, 1, 0, 0, 0))
+            return "[" + postDate.ToLongDateString() + " " + postDate.ToLongTimeString() + "] --> " + "Me" + " " + " says: " + statusText.InnerText + ".";
+        else
+            return "";
     }
 
 
@@ -163,7 +181,9 @@ public partial class _Default : System.Web.UI.Page
         int num = 0;
         if (osobe != null)
             num = osobe.Count;
-        ListBox1.Items.Add(MyStatus());
+        string myStatus = MyStatus();
+        if(myStatus!="")
+            ListBox1.Items.Add(myStatus);
         for (int i = 0; i < num; i++)
         {
             ListBox1.Items.Add(Status(osobe.ElementAt(i).name, osobe.ElementAt(i).surname));

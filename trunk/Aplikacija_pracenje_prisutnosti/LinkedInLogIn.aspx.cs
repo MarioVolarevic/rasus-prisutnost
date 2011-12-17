@@ -14,6 +14,7 @@ public partial class _Default : System.Web.UI.Page
        
             OAuthObject._oauth = new OAuthLinkedIn();
             String requestToken = OAuthObject._oauth.getRequestToken();
+            Session["LinkedInRequestToken"] = requestToken;
             Page.Response.Redirect(OAuthObject._oauth.AuthorizationLink);
      
     }
