@@ -1,0 +1,1 @@
+Prati se prisutnost na 5 mreza te se ispisuju statusi korisnika.
